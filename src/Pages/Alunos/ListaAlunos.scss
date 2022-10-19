@@ -1,0 +1,107 @@
+.students-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 30px;
+
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
+
+  &-title {
+    p {
+      margin: 0;
+    }
+    h2 {
+      margin: 0;
+    }
+  }
+
+  &-actions {
+    input {
+      padding: 5px 15px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 4px;
+      height: 20px;
+      margin-right: 5px;
+      width: 300px;
+
+      &:focus {
+        outline: red;
+        border-color: rgba(0, 0, 0, 0.5);
+      }
+    }
+  }
+}
+
+.students-list-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 15px;
+  background-color: rgba(0, 0, 0, 0.05);
+
+  h2 {
+    width: 100%;
+    font-size: 14px;
+    opacity: 0.6;
+  }
+}
+
+.students-list {
+  padding: 0;
+  margin: 0;
+
+  .student-row {
+    display: flex;
+    justify-content: space-between;
+    list-style-type: none;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+    padding: 15px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: hsl(0, 0%, 85%);
+      transform: scale(1.01);
+    }
+
+    h3,
+    p {
+      margin: 0;
+    }
+
+    &-cell {
+      width: 100%;
+    }
+  }
+}
+
+.students {
+  margin: 0 30px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  border-radius: 8px;
+}
+
+.opacity {
+  opacity: 0.6;
+  font-weight: 600;
+}
+
+.title {
+  font-weight: 600;
+}
+
+.student-form-container {
+  position: absolute;
+  right: 0;
+  top: 0;
+  background-color: white;
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.animator {
+  width: 0;
+  transition: 400ms;
+
+  &.show {
+    height: 99.7vh;
+    width: 80vw;
+  }
+}
