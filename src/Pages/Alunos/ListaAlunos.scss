@@ -16,6 +16,8 @@
   }
 
   &-actions {
+    display: flex;
+
     input {
       padding: 5px 15px;
       border: 1px solid rgba(0, 0, 0, 0.2);
@@ -58,7 +60,8 @@
     cursor: pointer;
 
     &:hover {
-      background-color: hsl(0, 0%, 85%);
+      background-color: #4c9aff;
+      color: white;
       transform: scale(1.01);
     }
 
@@ -104,4 +107,12 @@
     height: 99.7vh;
     width: 80vw;
   }
+}
+
+.loading-students-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 150px;
+  border-top: 1px solid #2684ff;
 }

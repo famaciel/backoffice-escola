@@ -2,10 +2,13 @@ import { useState } from "react";
 import "./CadastroAluno.scss";
 import Select from "react-select";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faArrowLeft } from "@fortawesome/free-solid-svg-icons";
+import { faArrowLeft, faTrash } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import ReactLoading from "react-loading";
+import { confirmAlert } from "react-confirm-alert";
+import "react-confirm-alert/src/react-confirm-alert.css";
 
 const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
-  console.log(studentToUpdate);
   const [student, setStudent] = useState(
     studentToUpdate || {
       ano: 0,
@@ -21,14 +24,14 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
     }
   );
 
+  const [loading, setLoading] = useState(false);
+
   const nucleoOptions = nucleos.map((a) => ({
     label: a.nome,
     value: a.id,
   }));
 
   const onChangeValue = (e) => {
-    console.log(e);
-
     const { name, value } = e.target;
 
     setStudent({
@@ -37,17 +40,78 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
     });
   };
 
-  const onSubmitForm = () => {
-    console.log(student);
+  const onSubmitForm = async () => {
+    try {
+      setLoading(true);
+
+      if (student.id) {
+        await axios.put(
+          `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/alunosmatr/${student.id}`,
+          student
+        );
+      } else {
+        await axios.post(
+          `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/alunosmatr`,
+          student
+        );
+      }
+
+      closeForm(true);
+    } catch (err) {
+      console.error("ERRO SUBMIT: ", err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const removeStudent = () => {
+    const deleteStudent = async () => {
+      await axios.delete(
+        `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/alunosmatr/${student.id}`,
+        student
+      );
+
+      closeForm(true);
+    };
+
+    confirmAlert({
+      title: "Remover aluno",
+      message: "Tem certeza que deseja remover este aluno?",
+      buttons: [
+        {
+          label: "Sim, remover",
+          onClick: deleteStudent,
+        },
+        {
+          label: "Cancelar",
+          // onClick: () => alert("Click No"),
+        },
+      ],
+    });
   };
 
   return (
     <div className="student-form">
       <div className="student-form-title">
-        <button onClick={closeForm} className="student-form-close-button">
-          <FontAwesomeIcon icon={faArrowLeft} />
-        </button>
-        <h2>Cadastrar aluno</h2>
+        <div>
+          <button
+            onClick={closeForm}
+            className="round-clickable-icon student-form-close-button"
+          >
+            <FontAwesomeIcon icon={faArrowLeft} />
+          </button>
+          <h2>Cadastrar aluno</h2>
+        </div>
+
+        {student.id && (
+          <button
+            onClick={removeStudent}
+            className="custom-button remove-student-button"
+          >
+            <FontAwesomeIcon icon={faTrash} color="red" />
+            Remover aluno
+          </button>
+        )}
       </div>
 
       <div className="student-form-fields">
@@ -74,22 +138,19 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
               value={student.nomeResp02}
             />
           </div>
-        </div>
-
-        <div className="student-form-col">
-          <div className="student-form-field-container">
-            <label>Núcleo:</label>
-            <Select
-              options={nucleoOptions}
-              value={nucleoOptions.find((a) => a.value === student.idNucleo)}
-            />
-          </div>
 
           <div className="student-form-field-container checkbox">
             <label>Fidelidade:</label>
             <input
               type="checkbox"
-              onChange={onChangeValue}
+              onChange={(e) =>
+                onChangeValue({
+                  target: {
+                    name: e.target.name,
+                    value: e.target.checked,
+                  },
+                })
+              }
               name="ehFidelidade"
               checked={student.ehFidelidade}
             />
@@ -99,9 +160,26 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
             <label>Com irmão:</label>
             <input
               type="checkbox"
-              onChange={onChangeValue}
+              onChange={(e) =>
+                onChangeValue({
+                  target: {
+                    name: e.target.name,
+                    value: e.target.checked,
+                  },
+                })
+              }
               name="temIrmao"
               checked={student.temIrmao}
+            />
+          </div>
+        </div>
+
+        <div className="student-form-col">
+          <div className="student-form-field-container">
+            <label>Núcleo:</label>
+            <Select
+              options={nucleoOptions}
+              value={nucleoOptions.find((a) => a.value === student.idNucleo)}
             />
           </div>
 
@@ -127,7 +205,11 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
 
       <div className="student-form-footer">
         <button className="custom-button" onClick={onSubmitForm}>
-          CONFIRMAR
+          {loading ? (
+            <ReactLoading type="bubbles" color="white" height={50} width={50} />
+          ) : (
+            "CONFIRMAR"
+          )}
         </button>
       </div>
     </div>

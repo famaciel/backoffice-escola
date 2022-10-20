@@ -1,11 +1,14 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { formatarCelular } from "../../Utils";
 import CadastroAluno from "./Form/CadastroAluno";
 import "./ListaAlunos.scss";
+import ReactLoading from "react-loading";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 const ListaAlunos = () => {
-  const [alunos, setAlunos] = useState([]);
+  const [alunos, setAlunos] = useState(null);
   const [nucleos, setNucleos] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
@@ -13,7 +16,7 @@ const ListaAlunos = () => {
   const formatStudent = (student, nucleos) => {
     return {
       ...student,
-      nucleo: nucleos.find((a) => a.id === student.idNucleo).nome,
+      nucleo: nucleos.find((a) => a.id === student.idNucleo)?.nome,
       contatoResp01_formatado: formatarCelular(student.contatoResp01),
       contatoResp02_formatado: formatarCelular(student.contatoResp02),
     };
@@ -59,44 +62,58 @@ const ListaAlunos = () => {
         </div>
       </div>
 
-      <div className="students">
-        <div className="students-list-header">
-          <h2>Aluno</h2>
-          <h2>Responsáveis</h2>
-          <h2>Contatos</h2>
+      {!alunos && (
+        <div className="loading-students-container">
+          <ReactLoading type="bars" color="#2684ff" height={50} width={50} />
         </div>
-        <ul className="students-list">
-          {alunos.map((st) => (
-            <li
-              key={st.id}
-              onClick={() => onSelectStudent(st)}
-              className="student-row"
-            >
-              <div className="student-row-cell">
-                <p className="title">{st.nome}</p>
-                <p className="opacity">{st.nucleo}</p>
-              </div>
+      )}
+      {alunos && (
+        <div className="students">
+          <div className="students-list-header">
+            <h2>Aluno</h2>
+            <h2>Responsáveis</h2>
+            <h2>Contatos</h2>
+            {/* <h2>Ações</h2> */}
+          </div>
+          <ul className="students-list">
+            {alunos.map((st) => (
+              <li
+                key={st.id}
+                onClick={() => onSelectStudent(st)}
+                className="student-row"
+              >
+                <div className="student-row-cell">
+                  <p className="title">{st.nome}</p>
+                  <p className="opacity">{st.nucleo || "--"}</p>
+                </div>
 
-              <div className="student-row-cell">
-                <p>{st.nomeResp01}</p>
-                <p>{st.nomeResp02}</p>
-              </div>
+                <div className="student-row-cell">
+                  <p>{st.nomeResp01}</p>
+                  <p>{st.nomeResp02}</p>
+                </div>
 
-              <div className="student-row-cell">
-                <p>{st.contatoResp01_formatado}</p>
-                <p>{st.contatoResp02_formatado}</p>
-              </div>
-            </li>
-          ))}
-        </ul>
-      </div>
+                <div className="student-row-cell">
+                  <p>{st.contatoResp01_formatado}</p>
+                  <p>{st.contatoResp02_formatado}</p>
+                </div>
+
+                {/* <div className="student-row-cell">
+                  <button></button>
+                </div> */}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <div className={`animator ${showForm && "show"} student-form-container`}>
         {showForm && (
           <CadastroAluno
-            closeForm={() => {
+            closeForm={(shouldLoadStudents) => {
               setShowForm(false);
               setSelectedStudent(null);
+
+              if (shouldLoadStudents) loadStudents();
             }}
             nucleos={nucleos}
             student={selectedStudent}

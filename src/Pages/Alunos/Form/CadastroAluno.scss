@@ -2,23 +2,13 @@
   padding: 0 30px;
 
   &-close-button {
-    cursor: pointer;
-    border: 0;
-    background-color: transparent;
-    border-radius: 50%;
-    height: 30px;
-    width: 30px;
     margin-left: -10px;
-
-    &:hover {
-      background-color: hsl(0, 0%, 80%);
-      transform: scale(1.2);
-      transition: 200ms;
-    }
   }
 
   &-title {
     margin: 30px 15px;
+    display: flex;
+    justify-content: space-between;
   }
 
   &-fields {
@@ -69,4 +59,17 @@
     justify-content: flex-end;
     margin-top: 30px;
   }
+}
+
+.remove-student-button {
+  background-color: red;
+
+  svg {
+    color: white !important;
+    margin: 0 8px 0 5px;
+  }
+}
+
+.react-confirm-alert-body {
+  border: 1px solid black;
 }
