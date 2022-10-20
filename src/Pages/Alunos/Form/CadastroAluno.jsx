@@ -130,7 +130,7 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
       <div className="student-form-title">
         <div>
           <button
-            onClick={closeForm}
+            onClick={() => closeForm(false)}
             className="round-clickable-icon student-form-close-button"
           >
             <FontAwesomeIcon icon={faArrowLeft} />

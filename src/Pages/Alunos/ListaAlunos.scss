@@ -75,10 +75,18 @@
     padding: 15px;
     cursor: pointer;
 
+    .action-buttons button svg {
+      opacity: 0.8;
+    }
+
     &:hover {
       background-color: #4c9aff;
       color: white;
       transform: scale(1.01);
+
+      .action-buttons button svg {
+        color: white;
+      }
     }
 
     h3,
@@ -137,4 +145,21 @@
   margin-left: 30px;
   align-self: flex-end;
   min-width: fit-content;
+}
+
+.action-buttons {
+  display: flex;
+
+  button:hover {
+    background-color: white;
+
+    svg {
+      color: gray !important;
+    }
+  }
+}
+
+.whatsapp-icon {
+  width: 20px;
+  height: 20px;
 }
