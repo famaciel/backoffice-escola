@@ -81,11 +81,11 @@ const ListaAlunos = () => {
     search,
   ]);
 
-  const openWhatsapp = (e) => {
+  const openWhatsapp = (e, student) => {
     e.stopPropagation(0);
 
     window.open(
-      "https://wa.me/+5511996684033?text=Ol%C3%A1%20%3CnomeResp01%3E.%20Abaixo%20enviamos%20o%20formul%C3%A1rio%20de%20solicita%C3%A7%C3%A3o%20de%20matr%C3%ADcula%20%20para%20o%20aluno%20%3CnomeAluno%3E,%20para%20o%20ano%20de%202023:%20",
+      `https://wa.me/+5548999128915?text=Olá%20${student.nomeResp01}.%20Abaixo%20enviamos%20o%20formulário%20de%20solicitação%20de%20matrícula%20%20para%20o%20aluno%20${student.nome},%20para%20o%20ano%20de%202023:%20 http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/`,
       "_blank"
     );
   };
@@ -216,7 +216,7 @@ const ListaAlunos = () => {
                       title="Enviar mensagem"
                     >
                       <button
-                        onClick={openWhatsapp}
+                        onClick={(e) => openWhatsapp(e, st)}
                         className="round-clickable-icon"
                       >
                         <img
