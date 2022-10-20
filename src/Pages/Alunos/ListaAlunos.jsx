@@ -81,11 +81,11 @@ const ListaAlunos = () => {
     search,
   ]);
 
-  const openWhatsapp = (e, student) => {
+  const openWhatsapp = (e, student, nomeResponsavel, telefoneResponsavel) => {
     e.stopPropagation(0);
 
     window.open(
-      `https://wa.me/+5548999128915?text=Olá%20${student.nomeResp01}.%20Abaixo%20enviamos%20o%20formulário%20de%20solicitação%20de%20matrícula%20%20para%20o%20aluno%20${student.nome},%20para%20o%20ano%20de%202023:%20 http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/`,
+      `https://wa.me/+55${telefoneResponsavel}?text=Olá%20${nomeResponsavel}.%20Abaixo%20enviamos%20o%20formulário%20de%20solicitação%20de%20matrícula%20%20para%20o%20aluno(a)%20${student.nome},%20para%20o%20ano%20de%202023:%20 http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/`,
       "_blank"
     );
   };
@@ -213,10 +213,31 @@ const ListaAlunos = () => {
                     <Tooltip
                       enterDelay={100}
                       leaveDelay={0}
-                      title="Enviar mensagem"
+                      title="Enviar mensagem responsável #1"
                     >
                       <button
-                        onClick={(e) => openWhatsapp(e, st)}
+                        onClick={(e) =>
+                          openWhatsapp(e, st, st.nomeResp01, st.contatoResp01)
+                        }
+                        className="round-clickable-icon"
+                      >
+                        <img
+                          className="whatsapp-icon"
+                          src={whatsappLogo}
+                          alt="Logo whatsapp"
+                        />
+                      </button>
+                    </Tooltip>
+
+                    <Tooltip
+                      enterDelay={100}
+                      leaveDelay={0}
+                      title="Enviar mensagem responsável #2"
+                    >
+                      <button
+                        onClick={(e) =>
+                          openWhatsapp(e, st, st.nomeResp02, st.contatoResp02)
+                        }
                         className="round-clickable-icon"
                       >
                         <img
