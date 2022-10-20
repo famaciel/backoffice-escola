@@ -7,6 +7,7 @@ import axios from "axios";
 import ReactLoading from "react-loading";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
+import ReactInputMask from "react-input-mask";
 
 const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
   const [student, setStudent] = useState(
@@ -32,7 +33,20 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
   }));
 
   const onChangeValue = (e) => {
-    const { name, value } = e.target;
+    const { name } = e.target;
+    let { value } = e.target;
+
+    if (["contatoResp01", "contatoResp02"].includes(name)) {
+      value = value
+        .replace("(", "")
+        .replace(")", "")
+        .replace("(", "")
+        .replace(/_/g, "")
+        .replace(" ", "")
+        .replace("-", "");
+    }
+
+    console.log(name, value);
 
     setStudent({
       ...student,
@@ -90,6 +104,27 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
     });
   };
 
+  const validateFields = () => {
+    const requiredFields = ["nome", "nomeResp01", "contatoResp01", "idNucleo"];
+    const requiredFieldsValidation = {
+      contatoResp01: (value) => value.length === 11,
+    };
+
+    const invalidFields = Object.keys(student).filter((a) => {
+      if (requiredFields.includes(a)) {
+        return (
+          !student[a] ||
+          (requiredFieldsValidation[a] &&
+            !requiredFieldsValidation[a](student[a]))
+        );
+      }
+
+      return false;
+    });
+
+    return invalidFields.length > 0;
+  };
+
   return (
     <div className="student-form">
       <div className="student-form-title">
@@ -117,12 +152,12 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
       <div className="student-form-fields">
         <div className="student-form-col">
           <div className="student-form-field-container">
-            <label>Nome:</label>
+            <label>* Nome:</label>
             <input onChange={onChangeValue} name="nome" value={student.nome} />
           </div>
 
           <div className="student-form-field-container">
-            <label>Nome responsável #1:</label>
+            <label>* Nome responsável #1:</label>
             <input
               onChange={onChangeValue}
               name="nomeResp01"
@@ -140,7 +175,7 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
           </div>
 
           <div className="student-form-field-container checkbox">
-            <label>Fidelidade:</label>
+            <label>Fidelidade</label>
             <input
               type="checkbox"
               onChange={(e) =>
@@ -157,7 +192,7 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
           </div>
 
           <div className="student-form-field-container checkbox">
-            <label>Com irmão:</label>
+            <label>Com irmão</label>
             <input
               type="checkbox"
               onChange={(e) =>
@@ -176,16 +211,20 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
 
         <div className="student-form-col">
           <div className="student-form-field-container">
-            <label>Núcleo:</label>
+            <label>* Núcleo:</label>
             <Select
               options={nucleoOptions}
               value={nucleoOptions.find((a) => a.value === student.idNucleo)}
+              onChange={(e) =>
+                onChangeValue({ target: { name: "idNucleo", value: e.value } })
+              }
             />
           </div>
 
           <div className="student-form-field-container">
-            <label>Contato #2:</label>
-            <input
+            <label>* Contato #1:</label>
+            <ReactInputMask
+              mask="(99) 99999-9999"
               onChange={onChangeValue}
               name="contatoResp01"
               value={student.contatoResp01}
@@ -194,7 +233,8 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
 
           <div className="student-form-field-container">
             <label>Contato #2:</label>
-            <input
+            <ReactInputMask
+              mask="(99) 99999-9999"
               onChange={onChangeValue}
               name="contatoResp02"
               value={student.contatoResp02}
@@ -204,7 +244,11 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
       </div>
 
       <div className="student-form-footer">
-        <button className="custom-button" onClick={onSubmitForm}>
+        <button
+          className="custom-button"
+          onClick={onSubmitForm}
+          disabled={validateFields()}
+        >
           {loading ? (
             <ReactLoading type="bubbles" color="white" height={50} width={50} />
           ) : (

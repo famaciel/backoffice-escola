@@ -24,6 +24,7 @@ const ListaAlunos = () => {
   };
 
   const loadStudents = useCallback(async () => {
+    console.log(search);
     setAlunos(null);
 
     const { data: alunos } = await axios.get(
@@ -56,18 +57,24 @@ const ListaAlunos = () => {
     value: a.id,
   }));
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
+  const handleChange = useCallback(
+    (event) => {
+      const { name, value } = event.target;
 
-    console.log(name, value);
+      console.log(search);
+      console.log(name, value);
 
-    setSearch({
-      ...search,
-      [name]: value,
-    });
-  };
+      setSearch({
+        ...search,
+        [name]: value,
+      });
+    },
+    [search]
+  );
 
-  const debouncedChangeHandler = useCallback(debounce(handleChange, 300), []);
+  const debouncedChangeHandler = useCallback(debounce(handleChange, 300), [
+    search,
+  ]);
 
   return (
     <div>

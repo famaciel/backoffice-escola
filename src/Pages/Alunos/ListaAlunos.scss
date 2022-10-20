@@ -7,6 +7,7 @@
   border-top: 1px solid rgba(0, 0, 0, 0.2);
 
   &-title {
+    width: fit-content;
     p {
       margin: 0;
     }
@@ -107,7 +108,7 @@
 }
 
 .student-form-container {
-  position: absolute;
+  position: fixed;
   right: 0;
   top: 0;
   background-color: white;
@@ -135,4 +136,5 @@
 .add-student-button {
   margin-left: 30px;
   align-self: flex-end;
+  min-width: fit-content;
 }

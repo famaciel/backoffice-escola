@@ -24,10 +24,15 @@ code {
   justify-content: center;
 }
 
-.custom-button:hover {
+.custom-button:not([disabled]):hover {
   background-color: #317434;
   transform: scale(1.05);
   transition: 300ms;
+}
+
+.custom-button:disabled {
+  background-color: gray;
+  cursor: default;
 }
 
 html,
