@@ -97,9 +97,8 @@ const ListaAlunos = () => {
           <div className="students-header-actions-combo">
             <ReactSelect
               className="nucleo-select"
-              options={nucleoOptions}
+              options={[{ label: "Nenhum", value: null }, ...nucleoOptions]}
               placeholder="Núcleo"
-              te
               value={nucleoOptions.find((a) => a.value === search.nucleo)}
               onChange={(e) =>
                 debouncedChangeHandler({
