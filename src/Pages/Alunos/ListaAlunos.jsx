@@ -44,7 +44,11 @@ const ListaAlunos = () => {
 
     setNucleos(nucleos);
 
-    setAlunos(alunos.map((st) => formatStudent(st, nucleos)));
+    setAlunos(
+      alunos
+        .map((st) => formatStudent(st, nucleos))
+        .sort((a, b) => a.nome.localeCompare(b.nome))
+    );
   }, [search]);
 
   const onSelectStudent = (st) => {
@@ -64,9 +68,6 @@ const ListaAlunos = () => {
   const handleChange = useCallback(
     (event) => {
       const { name, value } = event.target;
-
-      console.log(search);
-      console.log(name, value);
 
       setSearch({
         ...search,
