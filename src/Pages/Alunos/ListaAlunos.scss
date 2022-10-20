@@ -17,20 +17,35 @@
 
   &-actions {
     display: flex;
+    align-items: center;
+
+    &-combo {
+      display: flex;
+      flex-direction: column;
+    }
 
     input {
       padding: 5px 15px;
       border: 1px solid rgba(0, 0, 0, 0.2);
       border-radius: 4px;
-      height: 20px;
+      height: 30px;
       margin-right: 5px;
-      width: 300px;
+      width: 150px;
 
       &:focus {
         outline: red;
-        border-color: rgba(0, 0, 0, 0.5);
+        border-color: #2684ff;
+        border-width: 2px;
       }
     }
+  }
+}
+
+.nucleo-select {
+  width: 180px;
+
+  input {
+    height: 28px;
   }
 }
 
@@ -115,4 +130,9 @@
   justify-content: center;
   padding-top: 150px;
   border-top: 1px solid #2684ff;
+}
+
+.add-student-button {
+  margin-left: 30px;
+  align-self: flex-end;
 }

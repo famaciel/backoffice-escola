@@ -1,17 +1,18 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import React, { useCallback, useEffect, useState } from "react";
 import { formatarCelular } from "../../Utils";
 import CadastroAluno from "./Form/CadastroAluno";
 import "./ListaAlunos.scss";
 import ReactLoading from "react-loading";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
+import ReactSelect from "react-select";
+import { debounce } from "lodash";
 
 const ListaAlunos = () => {
   const [alunos, setAlunos] = useState(null);
   const [nucleos, setNucleos] = useState([]);
   const [showForm, setShowForm] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
+  const [search, setSearch] = useState({});
 
   const formatStudent = (student, nucleos) => {
     return {
@@ -23,8 +24,13 @@ const ListaAlunos = () => {
   };
 
   const loadStudents = useCallback(async () => {
+    setAlunos(null);
+
     const { data: alunos } = await axios.get(
-      "https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/alunosmatr"
+      "https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/alunosmatr/busca",
+      {
+        params: search,
+      }
     );
 
     const { data: nucleos } = await axios.get(
@@ -34,7 +40,7 @@ const ListaAlunos = () => {
     setNucleos(nucleos);
 
     setAlunos(alunos.map((st) => formatStudent(st, nucleos)));
-  }, []);
+  }, [search]);
 
   const onSelectStudent = (st) => {
     setSelectedStudent(st);
@@ -45,6 +51,24 @@ const ListaAlunos = () => {
     loadStudents();
   }, [loadStudents]);
 
+  const nucleoOptions = nucleos.map((a) => ({
+    label: a.nome,
+    value: a.id,
+  }));
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+
+    console.log(name, value);
+
+    setSearch({
+      ...search,
+      [name]: value,
+    });
+  };
+
+  const debouncedChangeHandler = useCallback(debounce(handleChange, 300), []);
+
   return (
     <div>
       <div className="students-header">
@@ -54,9 +78,41 @@ const ListaAlunos = () => {
         </div>
 
         <div className="students-header-actions">
-          <input placeholder="Buscar alunos" />
+          <div className="students-header-actions-combo">
+            <input
+              name="nome"
+              placeholder="Nome aluno"
+              onChange={debouncedChangeHandler}
+            />
+          </div>
 
-          <button className="custom-button" onClick={() => setShowForm(true)}>
+          <div className="students-header-actions-combo">
+            <input
+              name="nomeResp"
+              placeholder="Nome responsável"
+              onChange={debouncedChangeHandler}
+            />
+          </div>
+
+          <div className="students-header-actions-combo">
+            <ReactSelect
+              className="nucleo-select"
+              options={nucleoOptions}
+              placeholder="Núcleo"
+              te
+              value={nucleoOptions.find((a) => a.value === search.nucleo)}
+              onChange={(e) =>
+                debouncedChangeHandler({
+                  target: { name: "idnucleo", value: e.value },
+                })
+              }
+            />
+          </div>
+
+          <button
+            className="custom-button add-student-button"
+            onClick={() => setShowForm(true)}
+          >
             + Adicionar aluno
           </button>
         </div>
@@ -67,6 +123,7 @@ const ListaAlunos = () => {
           <ReactLoading type="bars" color="#2684ff" height={50} width={50} />
         </div>
       )}
+
       {alunos && (
         <div className="students">
           <div className="students-list-header">
