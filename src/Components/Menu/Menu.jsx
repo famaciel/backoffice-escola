@@ -3,6 +3,10 @@ import "./Menu.scss";
 import logo from "../../Utils/logo.jpg";
 
 const Menu = () => {
+  const { pathname } = window.location;
+
+  if (pathname.includes("matricular")) return;
+
   return (
     <div className="menu">
       <h1>

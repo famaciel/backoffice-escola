@@ -1,0 +1,54 @@
+.matricula-form {
+  width: 100%;
+  height: 100vh;
+
+  padding-bottom: 60px;
+
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  &-header {
+    text-align: center;
+  }
+}
+
+.student-form-row {
+  display: flex;
+  align-items: center;
+
+  .student-form-field-container {
+    margin: 15px;
+    width: 100%;
+
+    &:first-child {
+      margin-left: 0;
+    }
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.next-step-button {
+  position: fixed;
+  top: 55%;
+  right: 60px;
+}
+
+.previous-step-button {
+  position: fixed;
+  top: 55%;
+  left: 60px;
+}
+
+.parents-form {
+  padding-bottom: 60px;
+}
+
+.student-form-field-container {
+  &.multiple input {
+    margin: 10px 0;
+  }
+}

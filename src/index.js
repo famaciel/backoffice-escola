@@ -5,6 +5,7 @@ import reportWebVitals from "./reportWebVitals";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ListaAlunos from "./Pages/Alunos/ListaAlunos";
 import Menu from "./Components/Menu/Menu";
+import FormularioMatricula from "./Pages/Matricula/FormularioMatricula/FormularioMatricula";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -12,6 +13,10 @@ const router = createBrowserRouter([
   {
     path: "/",
     element: <ListaAlunos />,
+  },
+  {
+    path: "/matricular/:studentId",
+    element: <FormularioMatricula />,
   },
 ]);
 
