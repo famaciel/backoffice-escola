@@ -15,7 +15,8 @@ import "./FormularioMatricula.scss";
 import FormularioPermissoes from "./Forms/FormularioPermissoes";
 
 const FormularioMatricula = () => {
-  const [matricula, setMatricula] = useState(null);
+  const [matricula, setMatricula] = useState({});
+  const [student, setStudent] = useState({});
   const [step, setStep] = useState(0);
 
   const { studentId } = useParams();
@@ -24,7 +25,8 @@ const FormularioMatricula = () => {
     const { data: student } = await axios.get(
       `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/alunosmatr/${studentId}`
     );
-    setMatricula(student);
+
+    setStudent(student);
   }, [studentId]);
 
   useEffect(() => {
@@ -40,8 +42,8 @@ const FormularioMatricula = () => {
   return (
     <div className="matricula-form">
       <div className="matricula-form-header">
-        <h2>Ficha de matrícula</h2>
-        <h3>Educação infantil</h3>
+        <h2>Escola dos Sonhos</h2>
+        <h3>Ficha de matrícula 2023</h3>
       </div>
 
       {step > 0 && (
@@ -74,6 +76,7 @@ const FormularioMatricula = () => {
       {step === 0 && (
         <FormularioStudent
           matricula={matricula}
+          student={student}
           onChangeValue={onChangeValue}
         />
       )}

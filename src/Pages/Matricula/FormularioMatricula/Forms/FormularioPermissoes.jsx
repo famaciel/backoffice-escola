@@ -7,17 +7,48 @@ const FormularioPermissoes = ({ matricula }) => {
           Além dos responsáveis, estas pessoas estão autorizadas a retirar o(a)
           estudante da escola:
         </label>
-        <input
-          name="contato_emergencia_1"
-          value={matricula.contato_emergencia_1}
-        />
-        <input
-          name="contato_emergencia_2"
-          value={matricula.contato_emergencia_2}
-        />
-        <input
-          name="contato_emergencia_3"
-          value={matricula.contato_emergencia_3}
+
+        <div className="double-input-labels">
+          <label>Nome</label>
+          <label>Parentesco</label>
+        </div>
+        <div className="double-input-container">
+          <input
+            name="nome_permitido_retirar_1"
+            value={matricula.nome_permitido_retirar_1}
+          />
+          <input
+            name="parentesco_permitido_retirar_1"
+            value={matricula.parentesco_permitido_retirar_1}
+          />
+        </div>
+        <div className="double-input-container">
+          <input
+            name="nome_permitido_retirar_2"
+            value={matricula.nome_permitido_retirar_2}
+          />
+          <input
+            name="parentesco_permitido_retirar_2"
+            value={matricula.parentesco_permitido_retirar_2}
+          />
+        </div>
+        <div className="double-input-container">
+          <input
+            name="nome_permitido_retirar_3"
+            value={matricula.nome_permitido_retirar_3}
+          />
+          <input
+            name="parentesco_permitido_retirar_3"
+            value={matricula.parentesco_permitido_retirar_3}
+          />
+        </div>
+      </div>
+
+      <div className="student-form-field-container">
+        <label>Observações adicionais:</label>
+        <textarea
+          name="observacoes_retirada"
+          value={matricula.observacoes_retirada}
         />
       </div>
     </div>

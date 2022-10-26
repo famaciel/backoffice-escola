@@ -7,7 +7,7 @@ const FormularioIntegral = ({ matricula, onChangeValue }) => {
 
       <div className="student-form-row">
         <div className="student-form-field-container checkbox">
-          <label>Com irmão</label>
+          <label>Quero incluir estudo em tempo integral</label>
           <input
             type="checkbox"
             onChange={(e) =>

@@ -56,3 +56,36 @@
 .formulario-integral {
   width: 40%;
 }
+
+.double-input-container {
+  display: flex;
+  input {
+    width: 100%;
+
+    &:first-child {
+      margin-right: 5px;
+    }
+
+    &:last-child {
+      margin-left: 5px;
+      width: 50%;
+    }
+  }
+}
+
+.formulario-emergencial {
+  width: 50%;
+}
+
+.double-input-labels {
+  display: flex;
+  margin-top: 30px;
+
+  label {
+    width: 100%;
+
+    &:last-child {
+      width: 52%;
+    }
+  }
+}

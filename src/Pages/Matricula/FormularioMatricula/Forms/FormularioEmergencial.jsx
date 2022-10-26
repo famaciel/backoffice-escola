@@ -1,21 +1,47 @@
 const FormularioEmergencial = ({ matricula }) => {
   return (
-    <div>
+    <div className="formulario-emergencial">
       <h4>Autorização e Emergência</h4>
       <div className="student-form-field-container multiple">
         <label>Pessoas que podem ser procuradas em caso de emergência:</label>
-        <input
-          name="contato_emergencia_1"
-          value={matricula.contato_emergencia_1}
-        />
-        <input
-          name="contato_emergencia_2"
-          value={matricula.contato_emergencia_2}
-        />
-        <input
-          name="contato_emergencia_3"
-          value={matricula.contato_emergencia_3}
-        />
+
+        <div className="double-input-labels">
+          <label>Nome</label>
+          <label>Telefone</label>
+        </div>
+        <div className="double-input-container">
+          <input
+            name="nome_contato_emergencia_1"
+            value={matricula.nome_contato_emergencia_1}
+          />
+          <input
+            placeholder="( ) _____-____"
+            name="telefone_contato_emergencia_1"
+            value={matricula.telefone_contato_emergencia_1}
+          />
+        </div>
+        <div className="double-input-container">
+          <input
+            name="nome_contato_emergencia_2"
+            value={matricula.nome_contato_emergencia_2}
+          />
+          <input
+            placeholder="( ) _____-____"
+            name="telefone_contato_emergencia_2"
+            value={matricula.telefone_contato_emergencia_2}
+          />
+        </div>
+        <div className="double-input-container">
+          <input
+            name="nome_contato_emergencia_3"
+            value={matricula.nome_contato_emergencia_3}
+          />
+          <input
+            placeholder="( ) _____-____"
+            name="telefone_contato_emergencia_3"
+            value={matricula.telefone_contato_emergencia_3}
+          />
+        </div>
       </div>
       <div className="student-form-field-container">
         <label>Tipo Sanguíneo:</label>

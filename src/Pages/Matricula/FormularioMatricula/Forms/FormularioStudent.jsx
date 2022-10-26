@@ -1,29 +1,28 @@
 import ReactInputMask from "react-input-mask";
 
-const FormularioStudent = ({ matricula, onChangeValue }) => {
+const FormularioStudent = ({ matricula, student, onChangeValue }) => {
   return (
     <div className="matricula-form-fields">
-      <h4>Cabeçalho</h4>
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Nome:</label>
-          <input name="nome" value={matricula.nome} />
+          <input disabled name="nome" value={student.nome} />
         </div>
         <div className="student-form-field-container">
           <label>Núcleo:</label>
-          <input name="nucleo" value={matricula.nucleo} />
+          <input disabled name="nucleo" value={student.nucleo} />
         </div>
       </div>
 
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Anuidade:</label>
-          <input name="anuidade" value={matricula.anuidade} />
+          <input disabled name="anuidade" value={student.anuidade} />
         </div>
 
         <div className="student-form-field-container">
           <label>Taxas:</label>
-          <input name="taxas" value={matricula.taxas} />
+          <input disabled name="taxas" value={student.taxas} />
         </div>
       </div>
 

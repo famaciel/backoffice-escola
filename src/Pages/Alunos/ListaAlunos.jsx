@@ -90,6 +90,11 @@ const ListaAlunos = () => {
     );
   };
 
+  const openMatricula = (e, student) => {
+    e.stopPropagation(0);
+    window.open(`/matricular/${student.id}`, "_blank");
+  };
+
   return (
     <div>
       <div className="students-header">
@@ -199,7 +204,7 @@ const ListaAlunos = () => {
                       title="Editar matricula"
                     >
                       <button
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e) => openMatricula(e, st)}
                         className="round-clickable-icon"
                       >
                         <FontAwesomeIcon

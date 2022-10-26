@@ -26,22 +26,12 @@ const FormularioParent = ({ matricula, parentName }) => {
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>RG:</label>
-          <ReactInputMask
-            placeholder="__.___.___-_"
-            mask="99.999.999-9"
-            name="rg"
-            value={matricula.rg}
-          />
+          <ReactInputMask name="rg" value={matricula.rg} />
         </div>
 
         <div className="student-form-field-container">
           <label>CPF:</label>
-          <ReactInputMask
-            placeholder="___.___.___-__"
-            mask="999.999.999-99"
-            name="cpf"
-            value={matricula.cpf}
-          />
+          <ReactInputMask name="cpf" value={matricula.cpf} />
         </div>
       </div>
 
