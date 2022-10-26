@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { useCallback, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import FormularioFinancial from "./Forms/FomularioFinancial";
+import FormularioIntegral from "./Forms/FormularioIntegral";
 import FormularioParent from "./Forms/FormularioParent";
 import FormularioEmergencial from "./Forms/FormularioEmergencial";
 import FormularioStudent from "./Forms/FormularioStudent";
@@ -16,7 +16,7 @@ import FormularioPermissoes from "./Forms/FormularioPermissoes";
 
 const FormularioMatricula = () => {
   const [matricula, setMatricula] = useState(null);
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(0);
 
   const { studentId } = useParams();
 
@@ -53,7 +53,7 @@ const FormularioMatricula = () => {
         </button>
       )}
 
-      {step < 4 && (
+      {step < 5 && (
         <button
           onClick={() => setStep(step + 1)}
           className="round-clickable-icon next-step-button"
@@ -62,7 +62,7 @@ const FormularioMatricula = () => {
         </button>
       )}
 
-      {step === 4 && (
+      {step === 5 && (
         <button
           onClick={() => setStep(step + 1)}
           className="round-clickable-icon next-step-button"
@@ -96,11 +96,13 @@ const FormularioMatricula = () => {
         </div>
       )}
 
-      {step === 2 && <FormularioFinancial matricula={matricula} />}
+      {step === 2 && <FormularioParent matricula={matricula} />}
 
       {step === 3 && <FormularioEmergencial matricula={matricula} />}
 
       {step === 4 && <FormularioPermissoes matricula={matricula} />}
+
+      {step === 5 && <FormularioIntegral matricula={matricula} />}
     </div>
   );
 };

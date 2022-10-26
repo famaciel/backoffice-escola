@@ -1,7 +1,7 @@
 const FormularioEmergencial = ({ matricula }) => {
   return (
     <div>
-      <h4>Emergencias</h4>
+      <h4>Autorização e Emergência</h4>
       <div className="student-form-field-container multiple">
         <label>Pessoas que podem ser procuradas em caso de emergência:</label>
         <input

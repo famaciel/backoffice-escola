@@ -1,7 +1,7 @@
 const FormularioPermissoes = ({ matricula }) => {
   return (
     <div>
-      <h4>Emergencias</h4>
+      <h4>Parentesco</h4>
       <div className="student-form-field-container multiple">
         <label>
           Além dos responsáveis, estas pessoas estão autorizadas a retirar o(a)
