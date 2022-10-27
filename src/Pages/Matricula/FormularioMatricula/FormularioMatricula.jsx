@@ -57,7 +57,10 @@ const FormularioMatricula = () => {
     onChangeValue({
       target: {
         name: "cabecalho",
-        value: cabecalho,
+        value: {
+          ...cabecalho,
+          valorIntegral5x: cabecalho.valorIntegral,
+        },
       },
     });
   }, [studentId]);
