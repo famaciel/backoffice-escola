@@ -1,11 +1,40 @@
 import ReactInputMask from "react-input-mask";
 import CurrencyInput from "react-currency-input-field";
+import { useCallback } from "react";
 
 const FormularioStudent = ({
-  matricula: { cabecalho, aluno },
-  student,
+  matricula: { cabecalho, dadosGerais },
   onChangeValue,
 }) => {
+  const onChangeDadosGerais = useCallback(
+    ({ target: { name, value } }) => {
+      console.log(name, value);
+
+      onChangeValue({
+        dadosGerais: {
+          ...dadosGerais,
+          [name]: value,
+        },
+      });
+    },
+    [onChangeValue, dadosGerais]
+  );
+
+  const onChangeEndereco = useCallback(
+    ({ target: { name, value } }) => {
+      onChangeValue({
+        dadosGerais: {
+          ...dadosGerais,
+          endereco: {
+            ...dadosGerais.endereco,
+            [name]: value,
+          },
+        },
+      });
+    },
+    [onChangeValue, dadosGerais]
+  );
+
   return (
     <div className="matricula-form-fields">
       <div className="student-form-row">
@@ -48,7 +77,11 @@ const FormularioStudent = ({
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Nome:</label>
-          <input name="nome" value={aluno.nome} />
+          <input
+            name="nome"
+            onChange={onChangeDadosGerais}
+            value={dadosGerais.nome}
+          />
         </div>
 
         <div className="student-form-field-container">
@@ -56,16 +89,31 @@ const FormularioStudent = ({
           <ReactInputMask
             placeholder="__/__/_____"
             mask="99/99/9999"
-            name="data_nascimento"
-            value={aluno.data_nascimento}
+            name="dataNascimento"
+            onChange={onChangeDadosGerais}
+            value={dadosGerais.dataNascimento}
           />
         </div>
 
         <div className="student-form-field-container">
           <label>Sexo</label>
           <div>
-            <input type="radio" value="Male" name="gender" /> Masculino
-            <input type="radio" value="Female" name="gender" /> Feminino
+            <input
+              onChange={onChangeDadosGerais}
+              type="radio"
+              value="M"
+              name="sexo"
+              checked={dadosGerais.sexo === "M"}
+            />
+            Masculino
+            <input
+              onChange={onChangeDadosGerais}
+              type="radio"
+              value="F"
+              name="sexo"
+              checked={dadosGerais.sexo === "F"}
+            />{" "}
+            Feminino
           </div>
         </div>
       </div>
@@ -73,36 +121,61 @@ const FormularioStudent = ({
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Natural de:</label>
-          <input name="natural_de" value={aluno.natural_de} />
+          <input
+            name="naturalDe"
+            onChange={onChangeDadosGerais}
+            value={dadosGerais.naturalDe}
+          />
         </div>
 
         <div className="student-form-field-container">
           <label>Estado:</label>
-          <input name="estado" value={aluno.estado} />
+          <input
+            name="estado"
+            onChange={onChangeDadosGerais}
+            value={dadosGerais.estado}
+          />
         </div>
       </div>
 
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Endereço residencial:</label>
-          <input name="endereco" value={aluno.endereco} />
+          <input
+            name="rua"
+            onChange={onChangeEndereco}
+            value={dadosGerais.endereco.rua}
+          />
         </div>
 
         <div className="student-form-field-container">
           <label>Numero:</label>
-          <input type="number" name="numero" value={aluno.numero} />
+          <input
+            type="number"
+            name="numero"
+            onChange={onChangeEndereco}
+            value={dadosGerais.endereco.numero}
+          />
         </div>
       </div>
 
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Bairro:</label>
-          <input name="bairro" value={aluno.bairro} />
+          <input
+            name="bairro"
+            onChange={onChangeEndereco}
+            value={dadosGerais.endereco.bairro}
+          />
         </div>
 
         <div className="student-form-field-container">
           <label>CEP:</label>
-          <input name="cep" value={aluno.cep} />
+          <input
+            name="cep"
+            onChange={onChangeEndereco}
+            value={dadosGerais.endereco.cep}
+          />
         </div>
       </div>
 
@@ -111,8 +184,9 @@ const FormularioStudent = ({
           <label>Telefone Residencial:</label>
           <ReactInputMask
             mask="(99) 99999-9999"
-            name="contatoResp01"
-            value={aluno.contatoResp01}
+            name="contatoResidencial"
+            onChange={onChangeEndereco}
+            value={dadosGerais.endereco.contatoResidencial}
           />
         </div>
 
@@ -120,8 +194,9 @@ const FormularioStudent = ({
           <label>Telefone recado:</label>
           <ReactInputMask
             mask="(99) 99999-9999"
-            name="contatoResp02"
-            value={aluno.contatoResp02}
+            name="contatoRecado"
+            onChange={onChangeEndereco}
+            value={dadosGerais.endereco.contatoRecado}
           />
         </div>
       </div>

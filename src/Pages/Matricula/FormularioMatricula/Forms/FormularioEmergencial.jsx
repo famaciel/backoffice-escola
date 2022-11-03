@@ -1,4 +1,44 @@
-const FormularioEmergencial = ({ matricula }) => {
+import { useCallback } from "react";
+import ReactInputMask from "react-input-mask";
+
+const FormularioEmergencial = ({
+  matricula: { autorizacoes },
+  onChangeValue,
+}) => {
+  const onChange = useCallback(
+    ({ target: { name, value } }) => {
+      console.log(name, value);
+
+      onChangeValue({
+        autorizacoes: {
+          ...autorizacoes,
+          [name]: value,
+        },
+      });
+    },
+    [onChangeValue, autorizacoes]
+  );
+
+  const onChangePermissaoPessoa = useCallback(
+    ({ target: { name, value } }, index) => {
+      console.log(name, value);
+
+      const newPessoas = autorizacoes.pessoas;
+
+      if (!newPessoas[index]) newPessoas.push({});
+
+      newPessoas[index][name] = value;
+
+      onChangeValue({
+        autorizacoes: {
+          ...autorizacoes,
+          pessoas: [...newPessoas],
+        },
+      });
+    },
+    [onChangeValue, autorizacoes]
+  );
+
   return (
     <div className="formulario-emergencial">
       <h4>Autorização e Emergência</h4>
@@ -11,62 +51,85 @@ const FormularioEmergencial = ({ matricula }) => {
         </div>
         <div className="double-input-container">
           <input
-            name="nome_contato_emergencia_1"
-            value={matricula.nome_contato_emergencia_1}
+            name="nome"
+            onChange={(e) => onChangePermissaoPessoa(e, 0)}
+            value={autorizacoes.pessoas[0]?.nome}
           />
-          <input
+          <ReactInputMask
+            mask="(99) 99999-9999"
+            name="contato"
             placeholder="( ) _____-____"
-            name="telefone_contato_emergencia_1"
-            value={matricula.telefone_contato_emergencia_1}
+            onChange={(e) => onChangePermissaoPessoa(e, 0)}
+            value={autorizacoes.pessoas[0]?.contato}
           />
         </div>
         <div className="double-input-container">
           <input
-            name="nome_contato_emergencia_2"
-            value={matricula.nome_contato_emergencia_2}
+            name="nome"
+            onChange={(e) => onChangePermissaoPessoa(e, 1)}
+            value={autorizacoes.pessoas[1]?.nome}
           />
-          <input
+          <ReactInputMask
+            mask="(99) 99999-9999"
+            name="contato"
             placeholder="( ) _____-____"
-            name="telefone_contato_emergencia_2"
-            value={matricula.telefone_contato_emergencia_2}
+            onChange={(e) => onChangePermissaoPessoa(e, 1)}
+            value={autorizacoes.pessoas[1]?.contato}
           />
         </div>
         <div className="double-input-container">
-          <input
-            name="nome_contato_emergencia_3"
-            value={matricula.nome_contato_emergencia_3}
+          <ReactInputMask
+            mask="(99) 99999-9999"
+            name="nome"
+            onChange={(e) => onChangePermissaoPessoa(e, 2)}
+            value={autorizacoes.pessoas[2]?.nome}
           />
           <input
+            name="contato"
             placeholder="( ) _____-____"
-            name="telefone_contato_emergencia_3"
-            value={matricula.telefone_contato_emergencia_3}
+            onChange={(e) => onChangePermissaoPessoa(e, 2)}
+            value={autorizacoes.pessoas[2]?.contato}
           />
         </div>
       </div>
       <div className="student-form-field-container">
         <label>Tipo Sanguíneo:</label>
-        <input name="tipo_sanguineo" value={matricula.tipo_sanguineo} />
+        <input
+          name="tipoSanguineo"
+          onChange={onChange}
+          value={autorizacoes.tipoSanguineo}
+        />
       </div>
       <div className="student-form-field-container">
         <label>Alergias:</label>
-        <input name="alergias" value={matricula.alergias} />
+        <input
+          name="alergias"
+          onChange={onChange}
+          value={autorizacoes.alergias}
+        />
       </div>
       <div className="student-form-field-container">
         <label>Restrição medica/alimentar:</label>
-        <input name="restricoes" value={matricula.restricoes} />
+        <input
+          name="restricaoAlimentar"
+          onChange={onChange}
+          value={autorizacoes.restricaoAlimentar}
+        />
       </div>
       <div className="student-form-field-container">
         <label>Medicamentos de uso contínuo:</label>
         <input
-          name="medicamentos_continuos"
-          value={matricula.medicamentos_continuos}
+          name="medicamentosUsoContinuo"
+          onChange={onChange}
+          value={autorizacoes.medicamentosUsoContinuo}
         />
       </div>
       <div className="student-form-field-container">
         <label>Observações adicionais:</label>
         <textarea
-          name="observacoes_emergencia"
-          value={matricula.observacoes_emergencia}
+          name="observacoes"
+          onChange={onChange}
+          value={autorizacoes.observacoes}
         />
       </div>
     </div>

@@ -85,7 +85,7 @@ const ListaAlunos = () => {
     e.stopPropagation(0);
 
     window.open(
-      `https://wa.me/+55${telefoneResponsavel}?text=Olá%20${nomeResponsavel}.%20Abaixo%20enviamos%20o%20formulário%20de%20solicitação%20de%20matrícula%20%20para%20o%20aluno(a)%20${student.nome},%20para%20o%20ano%20de%202023:%20 http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/`,
+      `https://wa.me/+55${telefoneResponsavel}?text=Olá%20${nomeResponsavel}.%20Abaixo%20enviamos%20o%20formulário%20de%20solicitação%20de%20matrícula%20%20para%20o%20aluno(a)%20${student.nome},%20para%20o%20ano%20de%202023:%20 http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/matricular/${student.id}`,
       "_blank"
     );
   };
@@ -189,6 +189,7 @@ const ListaAlunos = () => {
                       <button
                         onClick={(e) => e.stopPropagation()}
                         className="round-clickable-icon"
+                        disabled={!st.foiMatriculado}
                       >
                         <FontAwesomeIcon
                           size="lg"
@@ -206,6 +207,7 @@ const ListaAlunos = () => {
                       <button
                         onClick={(e) => openMatricula(e, st)}
                         className="round-clickable-icon"
+                        disabled={!st.foiMatriculado}
                       >
                         <FontAwesomeIcon
                           size="lg"

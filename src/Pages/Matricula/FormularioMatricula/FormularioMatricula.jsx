@@ -13,18 +13,100 @@ import FormularioEmergencial from "./Forms/FormularioEmergencial";
 import FormularioStudent from "./Forms/FormularioStudent";
 import "./FormularioMatricula.scss";
 import FormularioPermissoes from "./Forms/FormularioPermissoes";
+import ReactLoading from "react-loading";
+
+const fakeMatricula = {
+  dadosGerais: {
+    endereco: {
+      rua: "Rua Luis Correia de Melo",
+      numero: "92",
+      bairro: "Vila Cruzeiro",
+      cep: "04726220",
+      contatoResidencial: "(11) 99668-4033",
+      contatoRecado: "(11) 97162-4558",
+    },
+    nome: "Emilly Cacelli Gregorio",
+    dataNascimento: "03/05/2020",
+    sexo: "F",
+    naturalDe: "São Paulo",
+    estado: "SP",
+  },
+  mae: {
+    nome: "Marianna Courrol Cacelli",
+    dataNascimento: "11/09/1992",
+    rg: "554878595",
+    cpf: "42434618804",
+    profissao: "Analista Contabil",
+    localTrabalho: "Etna",
+    cargo: "Analista contabil",
+    contatoPrincipal: "(11) 97162-4558",
+    contatoCelular: "",
+    email: "mcacelli@outlook.com",
+  },
+  pai: {
+    nome: "Mauricio Gregorio",
+    dataNascimento: "03/08/1998",
+    rg: "557868014",
+    cpf: "46147576852",
+    profissao: "Desenvolvedor",
+    localTrabalho: "Zup IT",
+    cargo: "Programador",
+    contatoPrincipal: "(11) 99668-4033",
+    contatoCelular: "",
+    email: "msgregorio@outlook.com",
+  },
+  respFinanceiro: {
+    nome: "Mauricio Gregorio",
+    dataNascimento: "03/08/1998",
+    rg: "557868014",
+    cpf: "46147576852",
+    profissao: "Desenvolvedor",
+    localTrabalho: "Zup IT",
+    cargo: "Programador",
+    contatoPrincipal: "(11) 99668-4033",
+    contatoCelular: "",
+    email: "msgregorio@outlook.com",
+  },
+  integral: {
+    opcao: true,
+    qtdeDias: 3,
+    anuidade: 27962.87,
+  },
+  seguranca: {
+    pessoas: [
+      {
+        nome: "Selene Maria da Silva",
+        parentesco: "Avó",
+      },
+    ],
+  },
+  autorizacoes: {
+    pessoas: [
+      {
+        nome: "Selene Maria da Silva",
+        contato: "11991132663",
+      },
+    ],
+    tipoSanguineo: "A+",
+  },
+  cabecalho: {
+    nomeAluno: "Ágatha Moreira Zanette",
+    nomeNucleo: "Desenvolvimento - 3º",
+    valorAnuidade: 17555.84,
+    valorTaxas: 450,
+    temIntegral: true,
+    valorIntegral: 31082.21,
+    valorIntegral2x: 25748.03,
+    valorIntegral3x: 27962.87,
+    valorIntegral5x: 31082.21,
+  },
+};
 
 const FormularioMatricula = () => {
-  const [matricula, setMatricula] = useState({
-    cabecalho: {},
-    aluno: {},
-    mae: {},
-    pai: {},
-    responsavel_financeiro: {},
-    autorizacoes_emergencias: {},
-    parentesco: {},
-    integral: {},
-  });
+  const [matricula, setMatricula] = useState(null);
+
+  const [submitLoading, setSubmitLoading] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
 
   const [student, setStudent] = useState({});
   const [step, setStep] = useState(0);
@@ -32,12 +114,12 @@ const FormularioMatricula = () => {
   const { studentId } = useParams();
 
   const onChangeValue = useCallback(
-    ({ target: { name, value } }) => {
-      console.log(name, value);
+    (value) => {
+      console.log(value);
 
       setMatricula({
         ...matricula,
-        [name]: value,
+        ...value,
       });
     },
     [matricula]
@@ -52,15 +134,29 @@ const FormularioMatricula = () => {
       `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/matricula/cabecalho/${studentId}`
     );
 
+    let { data: matricula } = await axios.get(
+      `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/matriculas/${studentId}`
+    );
+
+    if (matricula.statusCode === 404) {
+      matricula = {
+        dadosGerais: { endereco: {} },
+        mae: {},
+        pai: {},
+        respFinanceiro: {},
+        integral: {},
+        seguranca: { pessoas: [] },
+        autorizacoes: { pessoas: [] },
+      };
+    }
+
     setStudent(student);
 
-    onChangeValue({
-      target: {
-        name: "cabecalho",
-        value: {
-          ...cabecalho,
-          valorIntegral5x: cabecalho.valorIntegral,
-        },
+    setMatricula({
+      ...matricula,
+      cabecalho: {
+        ...cabecalho,
+        valorIntegral5x: cabecalho.valorIntegral,
       },
     });
   }, [studentId]);
@@ -71,11 +167,45 @@ const FormularioMatricula = () => {
 
   if (!matricula) return; // loading
 
-  const submitForm = () => {
-    console.log(matricula);
+  const submitForm = async () => {
+    try {
+      setSubmitLoading(true);
+
+      await axios.post(
+        `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/matriculas`,
+        {
+          id: student.id,
+          idNucleo: matricula.cabecalho.idNucleo,
+          ...matricula,
+        }
+      );
+
+      setSubmitLoading(false);
+      setSubmitSuccess(true);
+    } catch (err) {
+      console.log("ERROR: ", err);
+    }
   };
 
-  console.log(step);
+  if (!matricula) return;
+
+  if (submitLoading) {
+    return (
+      <div className="submit-loading-container">
+        <h1>Registrando matricula...</h1>
+        <ReactLoading type="bars" color="#2684ff" height={50} width={50} />
+      </div>
+    );
+  }
+
+  if (submitSuccess) {
+    return (
+      <div className="submit-loading-container">
+        <h1>Matricula cadastrada com sucesso!</h1>
+        <FontAwesomeIcon icon={faCheck} color="#2684ff" size="5x" />
+      </div>
+    );
+  }
 
   return (
     <div className="matricula-form">
@@ -112,7 +242,6 @@ const FormularioMatricula = () => {
       {step === 0 && (
         <FormularioStudent
           matricula={matricula}
-          student={student}
           onChangeValue={onChangeValue}
         />
       )}
@@ -120,23 +249,28 @@ const FormularioMatricula = () => {
       {step === 1 && (
         <div className="parents-form">
           <FormularioParent
-            parent="mae"
             parentName="Mãe"
-            matricula={matricula}
+            parent="mae"
+            dadosParent={matricula.mae}
             onChangeValue={onChangeValue}
           />
 
           <FormularioParent
-            parent="pai"
             parentName="Pai"
-            matricula={matricula}
+            parent="pai"
+            dadosParent={matricula.pai}
             onChangeValue={onChangeValue}
           />
         </div>
       )}
 
       {step === 2 && (
-        <FormularioParent matricula={matricula} onChangeValue={onChangeValue} />
+        <FormularioParent
+          parent="respFinanceiro"
+          parentName="Responsável financeiro"
+          dadosParent={matricula.respFinanceiro}
+          onChangeValue={onChangeValue}
+        />
       )}
 
       {step === 3 && (

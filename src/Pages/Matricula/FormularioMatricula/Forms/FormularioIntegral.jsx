@@ -11,35 +11,30 @@ const FormularioIntegral = ({
   matricula: { cabecalho, integral },
   onChangeValue,
 }) => {
+  console.log(cabecalho);
   const onSelectIntegralDays = (e) => {
     onChangeValue({
-      target: {
-        name: "integral",
-        value: {
-          ...integral,
-          quantidade_dias: e.value,
-          anuidade: cabecalho[`valorIntegral${e.value}x`],
-        },
+      integral: {
+        ...integral,
+        qtdeDias: e.value,
+        anuidade: cabecalho[`valorIntegral${e.value}x`],
       },
     });
   };
 
-  const onChangeIntegralElegivel = (e) => {
+  const onChangeIntegralOpcao = (e) => {
     const newValue = {
       ...integral,
-      elegivel: e.target.checked,
+      opcao: e.target.checked,
     };
 
     if (!e.target.checked) {
-      newValue.quantidade_dias = undefined;
+      newValue.qtdeDias = undefined;
       newValue.anuidade = undefined;
     }
 
     onChangeValue({
-      target: {
-        name: "integral",
-        value: newValue,
-      },
+      integral: newValue,
     });
   };
 
@@ -52,27 +47,25 @@ const FormularioIntegral = ({
           <label>Quero incluir estudo em tempo integral</label>
           <input
             type="checkbox"
-            onChange={onChangeIntegralElegivel}
+            onChange={onChangeIntegralOpcao}
             name="temIrmao"
-            checked={integral.elegivel}
+            checked={integral.opcao}
           />
         </div>
 
-        {integral.elegivel && (
+        {integral.opcao && (
           <div className="student-form-field-container">
             <label>Quantos dias:</label>
             <ReactSelect
               options={integralOptions}
               onChange={onSelectIntegralDays}
-              value={integralOptions.find(
-                (a) => a.value === integral.quantidade_dias
-              )}
+              value={integralOptions.find((a) => a.value === integral.qtdeDias)}
             />
           </div>
         )}
       </div>
 
-      {integral.quantidade_dias && (
+      {integral.qtdeDias ? (
         <div className="student-form-field-container">
           <label>Anuidade:</label>
           <CurrencyInput
@@ -83,6 +76,8 @@ const FormularioIntegral = ({
             value={integral.anuidade}
           />
         </div>
+      ) : (
+        ""
       )}
     </div>
   );

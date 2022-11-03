@@ -46,17 +46,25 @@ body,
   border: 0;
   background-color: transparent;
   border-radius: 50%;
-  padding: 10px 15px;
+  padding: 10px 14px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.round-clickable-icon:hover {
+.round-clickable-icon:hover:not([disabled]) {
   background-color: #2684ff;
   color: white;
-  transform: scale(1.2);
+  transform: scale(1.1);
   transition: 200ms;
+}
+
+.round-clickable-icon:disabled {
+  cursor: default;
+}
+
+.round-clickable-icon:disabled svg {
+  color: gray !important;
 }
 
 textarea {

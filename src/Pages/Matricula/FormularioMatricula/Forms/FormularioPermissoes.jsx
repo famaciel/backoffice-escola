@@ -1,7 +1,43 @@
-const FormularioPermissoes = ({ matricula }) => {
+import { useCallback } from "react";
+
+const FormularioPermissoes = ({ matricula: { seguranca }, onChangeValue }) => {
+  const onChange = useCallback(
+    ({ target: { name, value } }) => {
+      console.log(name, value);
+
+      onChangeValue({
+        seguranca: {
+          ...seguranca,
+          [name]: value,
+        },
+      });
+    },
+    [onChangeValue, seguranca]
+  );
+
+  const onChangePermissaoPessoa = useCallback(
+    ({ target: { name, value } }, index) => {
+      console.log(name, value);
+
+      const newPessoas = seguranca.pessoas;
+
+      if (!newPessoas[index]) newPessoas.push({});
+
+      newPessoas[index][name] = value;
+
+      onChangeValue({
+        seguranca: {
+          ...seguranca,
+          pessoas: [...newPessoas],
+        },
+      });
+    },
+    [onChangeValue, seguranca]
+  );
+
   return (
     <div>
-      <h4>Parentesco</h4>
+      <h4>Segurança</h4>
       <div className="student-form-field-container multiple">
         <label>
           Além dos responsáveis, estas pessoas estão autorizadas a retirar o(a)
@@ -14,32 +50,38 @@ const FormularioPermissoes = ({ matricula }) => {
         </div>
         <div className="double-input-container">
           <input
-            name="nome_permitido_retirar_1"
-            value={matricula.nome_permitido_retirar_1}
+            name="nome"
+            onChange={(e) => onChangePermissaoPessoa(e, 0)}
+            value={seguranca.pessoas[0]?.nome}
           />
           <input
-            name="parentesco_permitido_retirar_1"
-            value={matricula.parentesco_permitido_retirar_1}
-          />
-        </div>
-        <div className="double-input-container">
-          <input
-            name="nome_permitido_retirar_2"
-            value={matricula.nome_permitido_retirar_2}
-          />
-          <input
-            name="parentesco_permitido_retirar_2"
-            value={matricula.parentesco_permitido_retirar_2}
+            name="parentesco"
+            onChange={(e) => onChangePermissaoPessoa(e, 0)}
+            value={seguranca.pessoas[0]?.parentesco}
           />
         </div>
         <div className="double-input-container">
           <input
-            name="nome_permitido_retirar_3"
-            value={matricula.nome_permitido_retirar_3}
+            name="nome"
+            onChange={(e) => onChangePermissaoPessoa(e, 1)}
+            value={seguranca.pessoas[1]?.nome}
           />
           <input
-            name="parentesco_permitido_retirar_3"
-            value={matricula.parentesco_permitido_retirar_3}
+            name="parentesco"
+            onChange={(e) => onChangePermissaoPessoa(e, 1)}
+            value={seguranca.pessoas[1]?.parentesco}
+          />
+        </div>
+        <div className="double-input-container">
+          <input
+            name="nome"
+            onChange={(e) => onChangePermissaoPessoa(e, 2)}
+            value={seguranca.pessoas[2]?.nome}
+          />
+          <input
+            name="parentesco"
+            onChange={(e) => onChangePermissaoPessoa(e, 2)}
+            value={seguranca.pessoas[2]?.parentesco}
           />
         </div>
       </div>
@@ -47,8 +89,9 @@ const FormularioPermissoes = ({ matricula }) => {
       <div className="student-form-field-container">
         <label>Observações adicionais:</label>
         <textarea
-          name="observacoes_retirada"
-          value={matricula.observacoes_retirada}
+          onChange={onChange}
+          name="observacoes"
+          value={seguranca.observacoes}
         />
       </div>
     </div>
