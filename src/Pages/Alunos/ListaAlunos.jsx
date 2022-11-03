@@ -187,7 +187,7 @@ const ListaAlunos = () => {
                       title="Visualizar matricula"
                     >
                       <button
-                        onClick={(e) => e.stopPropagation()}
+                        onClick={(e) => openMatricula(e, st)}
                         className="round-clickable-icon"
                         disabled={!st.foiMatriculado}
                       >
@@ -207,7 +207,6 @@ const ListaAlunos = () => {
                       <button
                         onClick={(e) => openMatricula(e, st)}
                         className="round-clickable-icon"
-                        disabled={!st.foiMatriculado}
                       >
                         <FontAwesomeIcon
                           size="lg"
