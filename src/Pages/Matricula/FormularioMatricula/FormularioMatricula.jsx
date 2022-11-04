@@ -198,7 +198,7 @@ const FormularioMatricula = () => {
         </button>
       )}
 
-      {step === 7 || (step === 4 && !matricula.cabecalho.temIntegral) ? (
+      {step === 7 ? (
         <button
           onClick={submitForm}
           className="round-clickable-icon next-step-button"
