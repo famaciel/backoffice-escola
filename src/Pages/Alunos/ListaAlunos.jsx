@@ -84,8 +84,17 @@ const ListaAlunos = () => {
   const openWhatsapp = (e, student, nomeResponsavel, telefoneResponsavel) => {
     e.stopPropagation(0);
 
+    const text = `Queridas Famílias,
+
+    Vamos iniciar o período de rematrícula e estamos encaminhando o link via WhatsApp, para efetivação do pré-cadastro das mesmas. \n
+    
+    Aluno(a): ${student.nome} \n
+    Link: https://main.d3uj4l1bgcf4dv.amplifyapp.com/matricular/${student.id} \n
+    
+    As rematrículas acontecerão no período de 09/11/2022 à 25/11/2022, das 08h00min às 11h00min e das 13h30min às 17h00min, e como nossas vagas são limitadas, pedimos que finalizem até a data limite no setor financeiro da escola.`;
+
     window.open(
-      `https://wa.me/+55${telefoneResponsavel}?text=Olá%20${nomeResponsavel}.%20Abaixo%20enviamos%20o%20formulário%20de%20solicitação%20de%20matrícula%20%20para%20o%20aluno(a)%20${student.nome},%20para%20o%20ano%20de%202023:%20 http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/matricular/${student.id}`,
+      `https://wa.me/+55${telefoneResponsavel}?text=${text}`,
       "_blank"
     );
   };
