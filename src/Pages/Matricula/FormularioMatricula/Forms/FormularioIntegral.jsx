@@ -1,3 +1,4 @@
+import { useCallback, useEffect } from "react";
 import CurrencyInput from "react-currency-input-field";
 import ReactSelect from "react-select";
 
@@ -12,15 +13,22 @@ const FormularioIntegral = ({
   onChangeValue,
 }) => {
   console.log(cabecalho);
-  const onSelectIntegralDays = (e) => {
-    onChangeValue({
-      integral: {
-        ...integral,
-        qtdeDias: e.value,
-        anuidade: cabecalho[`valorIntegral${e.value}x`],
-      },
-    });
-  };
+  const onSelectIntegralDays = useCallback(
+    (e) => {
+      onChangeValue({
+        integral: {
+          ...integral,
+          qtdeDias: e.value,
+          anuidade: cabecalho[`valorIntegral${e.value}x`],
+        },
+      });
+    },
+    [cabecalho, integral, onChangeValue]
+  );
+
+  useEffect(() => {
+    onSelectIntegralDays({ value: integral.qtdeDias });
+  }, [onSelectIntegralDays, integral.qtdeDias]);
 
   const onChangeIntegralOpcao = (e) => {
     const newValue = {

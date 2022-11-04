@@ -3,7 +3,7 @@ import CurrencyInput from "react-currency-input-field";
 import { useCallback } from "react";
 
 const FormularioStudent = ({
-  matricula: { cabecalho, dadosGerais },
+  matricula: { integral, cabecalho, dadosGerais },
   onChangeValue,
 }) => {
   const onChangeDadosGerais = useCallback(
@@ -35,6 +35,14 @@ const FormularioStudent = ({
     [onChangeValue, dadosGerais]
   );
 
+  const buildAnuidade = () => {
+    if (cabecalho.temIntegral && integral.opcao) {
+      return cabecalho[`valorIntegral${integral.qtdeDias}x`];
+    }
+
+    return cabecalho.valorAnuidade;
+  };
+
   return (
     <div className="matricula-form-fields">
       <div className="student-form-row">
@@ -56,7 +64,7 @@ const FormularioStudent = ({
             decimalsLimit={2}
             prefix="R$ "
             name="anuidade"
-            value={cabecalho.valorAnuidade}
+            value={buildAnuidade()}
           />
         </div>
 

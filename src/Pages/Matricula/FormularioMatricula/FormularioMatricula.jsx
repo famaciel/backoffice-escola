@@ -14,109 +14,49 @@ import FormularioStudent from "./Forms/FormularioStudent";
 import "./FormularioMatricula.scss";
 import FormularioPermissoes from "./Forms/FormularioPermissoes";
 import ReactLoading from "react-loading";
+import InfoDocumentos from "./Forms/InfoDocumentos";
+import DownloadDocuments from "./Forms/DownloadDocuments";
+import logo from "../../../Utils/logo.jpg";
 
-const fakeMatricula = {
-  dadosGerais: {
-    endereco: {
-      rua: "Rua Luis Correia de Melo",
-      numero: "92",
-      bairro: "Vila Cruzeiro",
-      cep: "04726220",
-      contatoResidencial: "(11) 99668-4033",
-      contatoRecado: "(11) 97162-4558",
-    },
-    nome: "Emilly Cacelli Gregorio",
-    dataNascimento: "03/05/2020",
-    sexo: "F",
-    naturalDe: "São Paulo",
-    estado: "SP",
+const fakeFiles = [
+  {
+    nome: "Contrato",
+    id: "a8c3dd9e-6908-4ef5-938e-2d63e26c6ed4",
+    url: "http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/Escola_Sonhos_Contrato.pdf",
+    idNucleo: "cf909149-ab87-470e-862c-6bc9c58f4881",
+    descricao: "Contrato de Presta\u00e7\u00e3o de Servi\u00e7o",
   },
-  mae: {
-    nome: "Marianna Courrol Cacelli",
-    dataNascimento: "11/09/1992",
-    rg: "554878595",
-    cpf: "42434618804",
-    profissao: "Analista Contabil",
-    localTrabalho: "Etna",
-    cargo: "Analista contabil",
-    contatoPrincipal: "(11) 97162-4558",
-    contatoCelular: "",
-    email: "mcacelli@outlook.com",
+  {
+    nome: "Dados",
+    id: "6571d6fd-8496-43a1-a0c9-fb542009f45f",
+    url: "http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/Escola_Sonhos_Dados.pdf",
+    idNucleo: "cf909149-ab87-470e-862c-6bc9c58f4881",
+    descricao: "Dados sobre a escola",
   },
-  pai: {
-    nome: "Mauricio Gregorio",
-    dataNascimento: "03/08/1998",
-    rg: "557868014",
-    cpf: "46147576852",
-    profissao: "Desenvolvedor",
-    localTrabalho: "Zup IT",
-    cargo: "Programador",
-    contatoPrincipal: "(11) 99668-4033",
-    contatoCelular: "",
-    email: "msgregorio@outlook.com",
+  {
+    nome: "Informa\u00e7\u00f5es",
+    id: "7d3144bf-9108-4897-a21b-cd13f9291c9c",
+    url: "http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/Escola_Sonhos_Informacoes.pdf",
+    idNucleo: "cf909149-ab87-470e-862c-6bc9c58f4881",
+    descricao: "Informa\u00e7\u00f5es extras",
   },
-  respFinanceiro: {
-    nome: "Mauricio Gregorio",
-    dataNascimento: "03/08/1998",
-    rg: "557868014",
-    cpf: "46147576852",
-    profissao: "Desenvolvedor",
-    localTrabalho: "Zup IT",
-    cargo: "Programador",
-    contatoPrincipal: "(11) 99668-4033",
-    contatoCelular: "",
-    email: "msgregorio@outlook.com",
-  },
-  integral: {
-    opcao: true,
-    qtdeDias: 3,
-    anuidade: 27962.87,
-  },
-  seguranca: {
-    pessoas: [
-      {
-        nome: "Selene Maria da Silva",
-        parentesco: "Avó",
-      },
-    ],
-  },
-  autorizacoes: {
-    pessoas: [
-      {
-        nome: "Selene Maria da Silva",
-        contato: "11991132663",
-      },
-    ],
-    tipoSanguineo: "A+",
-  },
-  cabecalho: {
-    nomeAluno: "Ágatha Moreira Zanette",
-    nomeNucleo: "Desenvolvimento - 3º",
-    valorAnuidade: 17555.84,
-    valorTaxas: 450,
-    temIntegral: true,
-    valorIntegral: 31082.21,
-    valorIntegral2x: 25748.03,
-    valorIntegral3x: 27962.87,
-    valorIntegral5x: 31082.21,
-  },
-};
+];
 
 const FormularioMatricula = () => {
   const [matricula, setMatricula] = useState(null);
+  const [student, setStudent] = useState(null);
+  const [filesToDownload, setFilesToDownload] = useState([]);
 
   const [submitLoading, setSubmitLoading] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(false);
 
-  const [student, setStudent] = useState({});
   const [step, setStep] = useState(0);
 
   const { studentId } = useParams();
 
   const onChangeValue = useCallback(
     (value) => {
-      console.log(value);
-
       setMatricula({
         ...matricula,
         ...value,
@@ -126,46 +66,70 @@ const FormularioMatricula = () => {
   );
 
   const loadStudent = useCallback(async () => {
-    const { data: student } = await axios.get(
-      `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/alunosmatr/${studentId}`
-    );
+    try {
+      setInitialLoading(true);
 
-    const { data: cabecalho } = await axios.get(
-      `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/matricula/cabecalho/${studentId}`
-    );
+      await new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(null);
+        }, 3000);
+      });
 
-    let { data: matricula } = await axios.get(
-      `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/matriculas/${studentId}`
-    );
+      let [
+        { data: student },
+        { data: cabecalho },
+        { data: matricula },
+        { data: filesToDownload },
+      ] = await Promise.all([
+        axios.get(
+          `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/alunosmatr/${studentId}`
+        ),
+        axios.get(
+          `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/matricula/cabecalho/${studentId}`
+        ),
+        axios.get(
+          `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/matriculas/${studentId}`
+        ),
+        axios.get(
+          `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/docs/aluno/${studentId}`
+        ),
+      ]);
 
-    if (matricula.statusCode === 404) {
-      matricula = {
-        dadosGerais: { endereco: {} },
-        mae: {},
-        pai: {},
-        respFinanceiro: {},
-        integral: {},
-        seguranca: { pessoas: [] },
-        autorizacoes: { pessoas: [] },
-      };
+      console.log(student, cabecalho, matricula);
+
+      if (matricula.statusCode === 404) {
+        matricula = {
+          dadosGerais: { endereco: {} },
+          mae: {},
+          pai: {},
+          respFinanceiro: {},
+          integral: {},
+          seguranca: { pessoas: [] },
+          autorizacoes: { pessoas: [] },
+        };
+      }
+
+      setStudent(student);
+
+      setMatricula({
+        ...matricula,
+        cabecalho: {
+          ...cabecalho,
+          valorIntegral5x: cabecalho.valorIntegral,
+        },
+      });
+
+      setFilesToDownload(filesToDownload);
+    } catch (err) {
+      console.error("ERROR: ", err);
+    } finally {
+      setInitialLoading(false);
     }
-
-    setStudent(student);
-
-    setMatricula({
-      ...matricula,
-      cabecalho: {
-        ...cabecalho,
-        valorIntegral5x: cabecalho.valorIntegral,
-      },
-    });
   }, [studentId]);
 
   useEffect(() => {
     loadStudent();
   }, [loadStudent]);
-
-  if (!matricula) return; // loading
 
   const submitForm = async () => {
     try {
@@ -187,7 +151,16 @@ const FormularioMatricula = () => {
     }
   };
 
-  if (!matricula) return;
+  console.log(initialLoading);
+
+  if (initialLoading || !matricula || !student) {
+    return (
+      <div className="submit-loading-container">
+        <h1>Buscando matricula...</h1>
+        <ReactLoading type="bars" color="#2684ff" height={50} width={50} />
+      </div>
+    );
+  }
 
   if (submitLoading) {
     return (
@@ -201,7 +174,8 @@ const FormularioMatricula = () => {
   if (submitSuccess) {
     return (
       <div className="submit-loading-container">
-        <h1>Matricula cadastrada com sucesso!</h1>
+        <h1>Matricula enviada com sucesso!</h1>
+        <p>A lista de materiais será enviada em janeiros de 2023 via e-mail</p>
         <FontAwesomeIcon icon={faCheck} color="#2684ff" size="5x" />
       </div>
     );
@@ -210,6 +184,7 @@ const FormularioMatricula = () => {
   return (
     <div className="matricula-form">
       <div className="matricula-form-header">
+        <img src={logo} alt="logo" />
         <h2>Escola dos Sonhos</h2>
         <h3>Ficha de matrícula 2023</h3>
       </div>
@@ -223,7 +198,7 @@ const FormularioMatricula = () => {
         </button>
       )}
 
-      {step === 5 || (step === 4 && !matricula.cabecalho.temIntegral) ? (
+      {step === 7 || (step === 4 && !matricula.cabecalho.temIntegral) ? (
         <button
           onClick={submitForm}
           className="round-clickable-icon next-step-button"
@@ -293,6 +268,10 @@ const FormularioMatricula = () => {
           onChangeValue={onChangeValue}
         />
       )}
+
+      {step === 6 && <InfoDocumentos />}
+
+      {step === 7 && <DownloadDocuments filesToDownload={filesToDownload} />}
     </div>
   );
 };

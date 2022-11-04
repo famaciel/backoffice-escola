@@ -3,6 +3,7 @@
   height: 100vh;
 
   padding-bottom: 60px;
+  padding-top: 30px;
 
   display: flex;
   align-items: center;
@@ -98,4 +99,55 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
+  p {
+    margin: 0;
+    margin-bottom: 60px;
+  }
+}
+
+.info-docs {
+  width: 50%;
+  padding-bottom: 60px;
+}
+
+.download-documents {
+  button {
+    height: 150px;
+    width: 150px;
+    margin: 15px;
+    background-color: white;
+    border: 1px solid #2684ff6e;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    padding: 10px;
+    position: relative;
+
+    cursor: pointer;
+    transition: 300ms;
+
+    .download-icon {
+      display: none;
+
+      position: absolute;
+      top: 43%;
+      left: 43%;
+      opacity: 1;
+    }
+
+    &:hover,
+    &:focus {
+      transform: scale(1.1);
+
+      border: 1px solid #144687;
+
+      h3,
+      p {
+        opacity: 0.5;
+      }
+
+      .download-icon {
+        display: block;
+      }
+    }
+  }
 }
