@@ -84,15 +84,14 @@ const ListaAlunos = () => {
   const openWhatsapp = (e, student, nomeResponsavel, telefoneResponsavel) => {
     e.stopPropagation(0);
 
-    const text = `Queridas Famílias, \n \n 
+    const text = `Queridas Famílias,
+
     Vamos iniciar o período de rematrícula e estamos encaminhando o link via WhatsApp, para efetivação do pré-cadastro das mesmas. \n
-    \n \n 
+    
     Aluno(a): ${student.nome} \n
     Link: https://main.d3uj4l1bgcf4dv.amplifyapp.com/matricular/${student.id} \n
-    \n \n 
+    
     As rematrículas acontecerão no período de 09/11/2022 à 25/11/2022, das 08h00min às 11h00min e das 13h30min às 17h00min, e como nossas vagas são limitadas, pedimos que finalizem até a data limite no setor financeiro da escola.`;
-
-    text = window.encodeURIComponent(text);
 
     window.open(
       `https://wa.me/+55${telefoneResponsavel}?text=${text}`,
