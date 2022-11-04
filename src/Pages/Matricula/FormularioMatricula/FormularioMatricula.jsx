@@ -181,6 +181,22 @@ const FormularioMatricula = () => {
     );
   }
 
+  const onPreviousStep = () => {
+    if (step === 6 && !matricula.cabecalho.temIntegral) {
+      return setStep(step - 2);
+    }
+
+    setStep(step - 1);
+  };
+
+  const onNextStep = () => {
+    if (step === 4 && !matricula.cabecalho.temIntegral) {
+      return setStep(step + 2);
+    }
+
+    setStep(step + 1);
+  };
+
   return (
     <div className="matricula-form">
       <div className="matricula-form-header">
@@ -191,7 +207,7 @@ const FormularioMatricula = () => {
 
       {step > 0 && (
         <button
-          onClick={() => setStep(step - 1)}
+          onClick={onPreviousStep}
           className="round-clickable-icon previous-step-button"
         >
           <FontAwesomeIcon icon={faArrowLeft} size="3x" />
@@ -207,7 +223,7 @@ const FormularioMatricula = () => {
         </button>
       ) : (
         <button
-          onClick={() => setStep(step + 1)}
+          onClick={onNextStep}
           className="round-clickable-icon next-step-button"
         >
           <FontAwesomeIcon icon={faArrowRight} size="3x" />
@@ -262,7 +278,7 @@ const FormularioMatricula = () => {
         />
       )}
 
-      {step === 5 && (
+      {step === 5 && matricula.cabecalho.temIntegral && (
         <FormularioIntegral
           matricula={matricula}
           onChangeValue={onChangeValue}
