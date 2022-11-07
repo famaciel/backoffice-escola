@@ -36,7 +36,7 @@ const FormularioPermissoes = ({ matricula: { seguranca }, onChangeValue }) => {
   );
 
   return (
-    <div>
+    <div className="matricula-form-fields">
       <h4>Segurança</h4>
       <div className="student-form-field-container multiple">
         <label>

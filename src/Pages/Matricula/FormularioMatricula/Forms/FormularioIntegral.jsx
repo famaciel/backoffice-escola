@@ -47,7 +47,7 @@ const FormularioIntegral = ({
   };
 
   return (
-    <div className="formulario-integral">
+    <div className="matricula-form-fields">
       <h4>Integral</h4>
 
       <div className="student-form-row">

@@ -193,7 +193,7 @@ const ListaAlunos = () => {
                     <Tooltip
                       enterDelay={100}
                       leaveDelay={0}
-                      title="Visualizar matricula"
+                      title="Visualizar matrícula"
                     >
                       <button
                         onClick={(e) => openMatricula(e, st)}

@@ -1,6 +1,6 @@
 const InfoDocumentos = () => {
   return (
-    <div className="info-docs">
+    <div className="matricula-form-fields">
       <div>
         <h2>Importante</h2>
         <span>

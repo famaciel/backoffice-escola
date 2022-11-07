@@ -17,35 +17,13 @@ import ReactLoading from "react-loading";
 import InfoDocumentos from "./Forms/InfoDocumentos";
 import DownloadDocuments from "./Forms/DownloadDocuments";
 import logo from "../../../Utils/logo.jpg";
-
-const fakeFiles = [
-  {
-    nome: "Contrato",
-    id: "a8c3dd9e-6908-4ef5-938e-2d63e26c6ed4",
-    url: "http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/Escola_Sonhos_Contrato.pdf",
-    idNucleo: "cf909149-ab87-470e-862c-6bc9c58f4881",
-    descricao: "Contrato de Presta\u00e7\u00e3o de Servi\u00e7o",
-  },
-  {
-    nome: "Dados",
-    id: "6571d6fd-8496-43a1-a0c9-fb542009f45f",
-    url: "http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/Escola_Sonhos_Dados.pdf",
-    idNucleo: "cf909149-ab87-470e-862c-6bc9c58f4881",
-    descricao: "Dados sobre a escola",
-  },
-  {
-    nome: "Informa\u00e7\u00f5es",
-    id: "7d3144bf-9108-4897-a21b-cd13f9291c9c",
-    url: "http://escoladossonhos-gestao.s3-website-us-east-1.amazonaws.com/Escola_Sonhos_Informacoes.pdf",
-    idNucleo: "cf909149-ab87-470e-862c-6bc9c58f4881",
-    descricao: "Informa\u00e7\u00f5es extras",
-  },
-];
+import { set } from "lodash";
 
 const FormularioMatricula = () => {
   const [matricula, setMatricula] = useState(null);
   const [student, setStudent] = useState(null);
   const [filesToDownload, setFilesToDownload] = useState([]);
+  const [isMobile] = useState(window.innerWidth <= 768);
 
   const [submitLoading, setSubmitLoading] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -156,7 +134,7 @@ const FormularioMatricula = () => {
   if (initialLoading || !matricula || !student) {
     return (
       <div className="submit-loading-container">
-        <h1>Buscando matricula...</h1>
+        <h1>Buscando matrícula...</h1>
         <ReactLoading type="bars" color="#2684ff" height={50} width={50} />
       </div>
     );
@@ -165,7 +143,7 @@ const FormularioMatricula = () => {
   if (submitLoading) {
     return (
       <div className="submit-loading-container">
-        <h1>Registrando matricula...</h1>
+        <h1>Registrando matrícula...</h1>
         <ReactLoading type="bars" color="#2684ff" height={50} width={50} />
       </div>
     );
@@ -174,12 +152,17 @@ const FormularioMatricula = () => {
   if (submitSuccess) {
     return (
       <div className="submit-loading-container">
-        <h1>Matricula enviada com sucesso!</h1>
+        <h1>Matrícula enviada com sucesso!</h1>
         <p>A lista de materiais será enviada em janeiros de 2023 via e-mail</p>
         <FontAwesomeIcon icon={faCheck} color="#2684ff" size="5x" />
       </div>
     );
   }
+
+  const scrollToTop = () => {
+    document.querySelector(".matricula-form").scrollTo(0, 0);
+    window.scrollTo(0, 0);
+  };
 
   const onPreviousStep = () => {
     if (step === 6 && !matricula.cabecalho.temIntegral) {
@@ -187,6 +170,7 @@ const FormularioMatricula = () => {
     }
 
     setStep(step - 1);
+    scrollToTop();
   };
 
   const onNextStep = () => {
@@ -195,99 +179,103 @@ const FormularioMatricula = () => {
     }
 
     setStep(step + 1);
+    scrollToTop();
   };
 
   return (
-    <div className="matricula-form">
-      <div className="matricula-form-header">
-        <img src={logo} alt="logo" />
-        <h2>Escola dos Sonhos</h2>
-        <h3>Ficha de matrícula 2023</h3>
-      </div>
-
-      {step > 0 && (
-        <button
-          onClick={onPreviousStep}
-          className="round-clickable-icon previous-step-button"
-        >
-          <FontAwesomeIcon icon={faArrowLeft} size="3x" />
-        </button>
-      )}
-
-      {step === 7 ? (
-        <button
-          onClick={submitForm}
-          className="round-clickable-icon next-step-button"
-        >
-          <FontAwesomeIcon icon={faCheck} size="3x" />
-        </button>
-      ) : (
-        <button
-          onClick={onNextStep}
-          className="round-clickable-icon next-step-button"
-        >
-          <FontAwesomeIcon icon={faArrowRight} size="3x" />
-        </button>
-      )}
-
-      {step === 0 && (
-        <FormularioStudent
-          matricula={matricula}
-          onChangeValue={onChangeValue}
-        />
-      )}
-
-      {step === 1 && (
-        <div className="parents-form">
-          <FormularioParent
-            parentName="Mãe"
-            parent="mae"
-            dadosParent={matricula.mae}
-            onChangeValue={onChangeValue}
-          />
-
-          <FormularioParent
-            parentName="Pai"
-            parent="pai"
-            dadosParent={matricula.pai}
-            onChangeValue={onChangeValue}
-          />
+    <div>
+      <div className="matricula-form">
+        <div className="matricula-form-header">
+          <img src={logo} alt="logo" />
+          <h2>Escola dos Sonhos</h2>
+          <h3>Ficha de matrícula 2023</h3>
         </div>
-      )}
 
-      {step === 2 && (
-        <FormularioParent
-          parent="respFinanceiro"
-          parentName="Responsável financeiro"
-          dadosParent={matricula.respFinanceiro}
-          onChangeValue={onChangeValue}
-        />
-      )}
+        {step === 0 && (
+          <FormularioStudent
+            matricula={matricula}
+            onChangeValue={onChangeValue}
+          />
+        )}
 
-      {step === 3 && (
-        <FormularioEmergencial
-          matricula={matricula}
-          onChangeValue={onChangeValue}
-        />
-      )}
+        {step === 1 && (
+          <div className="matricula-form-fields">
+            <FormularioParent
+              parentName="Mãe"
+              parent="mae"
+              dadosParent={matricula.mae}
+              onChangeValue={onChangeValue}
+            />
 
-      {step === 4 && (
-        <FormularioPermissoes
-          matricula={matricula}
-          onChangeValue={onChangeValue}
-        />
-      )}
+            <FormularioParent
+              parentName="Pai"
+              parent="pai"
+              dadosParent={matricula.pai}
+              onChangeValue={onChangeValue}
+            />
+          </div>
+        )}
 
-      {step === 5 && matricula.cabecalho.temIntegral && (
-        <FormularioIntegral
-          matricula={matricula}
-          onChangeValue={onChangeValue}
-        />
-      )}
+        {step === 2 && (
+          <FormularioParent
+            parent="respFinanceiro"
+            parentName="Responsável financeiro"
+            dadosParent={matricula.respFinanceiro}
+            onChangeValue={onChangeValue}
+          />
+        )}
 
-      {step === 6 && <InfoDocumentos />}
+        {step === 3 && (
+          <FormularioEmergencial
+            matricula={matricula}
+            onChangeValue={onChangeValue}
+          />
+        )}
 
-      {step === 7 && <DownloadDocuments filesToDownload={filesToDownload} />}
+        {step === 4 && (
+          <FormularioPermissoes
+            matricula={matricula}
+            onChangeValue={onChangeValue}
+          />
+        )}
+
+        {step === 5 && matricula.cabecalho.temIntegral && (
+          <FormularioIntegral
+            matricula={matricula}
+            onChangeValue={onChangeValue}
+          />
+        )}
+
+        {step === 6 && <InfoDocumentos />}
+
+        {step === 7 && <DownloadDocuments filesToDownload={filesToDownload} />}
+      </div>
+      <div className="formulario-matricula-buttons">
+        {step > 0 && (
+          <button
+            onClick={onPreviousStep}
+            className="round-clickable-icon previous-step-button"
+          >
+            <FontAwesomeIcon icon={faArrowLeft} size="3x" />
+          </button>
+        )}
+
+        {step === 7 ? (
+          <button
+            onClick={submitForm}
+            className="round-clickable-icon next-step-button"
+          >
+            <FontAwesomeIcon icon={faCheck} size="3x" />
+          </button>
+        ) : (
+          <button
+            onClick={onNextStep}
+            className="round-clickable-icon next-step-button"
+          >
+            <FontAwesomeIcon icon={faArrowRight} size="3x" />
+          </button>
+        )}
+      </div>
     </div>
   );
 };

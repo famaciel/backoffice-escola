@@ -2,7 +2,6 @@
   width: 100%;
   height: 100vh;
 
-  padding-bottom: 60px;
   padding-top: 30px;
 
   display: flex;
@@ -32,16 +31,46 @@
   }
 }
 
+@media (max-width: 768px) {
+  .matricula-form {
+    height: calc(100vh - 110px);
+    overflow: auto;
+  }
+
+  .formulario-matricula-buttons {
+    position: fixed;
+    bottom: 0;
+    height: 80px;
+    display: flex;
+    border-top: 1px solid #2684ff;
+    width: 100%;
+    justify-content: space-around;
+  }
+
+  .round-clickable-icon {
+    border-radius: 0;
+    width: 100%;
+
+    &:first-child {
+      border-right: 1px solid rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
 .next-step-button {
-  position: fixed;
-  top: 55%;
-  right: 60px;
+  @media (min-width: 768px) {
+    position: fixed;
+    top: 55%;
+    right: 60px;
+  }
 }
 
 .previous-step-button {
-  position: fixed;
-  top: 55%;
-  left: 60px;
+  @media (min-width: 768px) {
+    position: fixed;
+    top: 55%;
+    left: 60px;
+  }
 }
 
 .parents-form {
@@ -111,10 +140,18 @@
   padding-bottom: 60px;
 }
 
-.download-documents {
-  button {
+.docs-grid {
+  display: flex;
+  flex-wrap: wrap;
+
+  .document {
     height: 150px;
-    width: 150px;
+    width: calc(50% - 60px);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
     margin: 15px;
     background-color: white;
     border: 1px solid #2684ff6e;
@@ -129,8 +166,8 @@
       display: none;
 
       position: absolute;
-      top: 43%;
-      left: 43%;
+      top: 45%;
+      left: 47%;
       opacity: 1;
     }
 
@@ -148,6 +185,34 @@
       .download-icon {
         display: block;
       }
+    }
+  }
+}
+
+.matricula-form-fields {
+  width: 60%;
+}
+
+@media (max-width: 768px) {
+  .matricula-form-fields {
+    width: 80%;
+  }
+
+  .student-form-row {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .student-form-field-container {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  .docs-grid {
+    .document {
+      margin: 5px;
+
+      width: calc(100% - 60px);
     }
   }
 }

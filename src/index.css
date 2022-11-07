@@ -52,11 +52,13 @@ body,
   justify-content: center;
 }
 
-.round-clickable-icon:hover:not([disabled]) {
-  background-color: #2684ff;
-  color: white;
-  transform: scale(1.1);
-  transition: 200ms;
+@media (min-width: 768px) {
+  .round-clickable-icon:hover:not([disabled]) {
+    background-color: #2684ff;
+    color: white;
+    transform: scale(1.1);
+    transition: 200ms;
+  }
 }
 
 .round-clickable-icon:disabled {

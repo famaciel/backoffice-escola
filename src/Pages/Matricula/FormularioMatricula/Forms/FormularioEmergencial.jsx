@@ -40,7 +40,7 @@ const FormularioEmergencial = ({
   );
 
   return (
-    <div className="formulario-emergencial">
+    <div className="matricula-form-fields">
       <h4>Autorização e Emergência</h4>
       <div className="student-form-field-container multiple">
         <label>Pessoas que podem ser procuradas em caso de emergência:</label>
