@@ -9,8 +9,6 @@ const FormularioParent = ({
 }) => {
   const onChange = useCallback(
     ({ target: { name, value } }) => {
-      console.log(name, value);
-
       onChangeValue({
         [parent]: {
           ...dadosParent,
@@ -20,6 +18,8 @@ const FormularioParent = ({
     },
     [parent, onChangeValue, dadosParent]
   );
+
+  const isRequired = parent === "respFinanceiro";
 
   return (
     <div className="matricula-form-fields">
@@ -31,12 +31,12 @@ const FormularioParent = ({
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>Nome:</label>
+          <label>{isRequired && "* "}Nome:</label>
           <input onChange={onChange} name="nome" value={dadosParent.nome} />
         </div>
 
         <div className="student-form-field-container">
-          <label>Data de nascimento:</label>
+          <label>{isRequired && "* "}Data de nascimento:</label>
           <ReactInputMask
             placeholder="__/__/_____"
             mask="99/99/9999"
@@ -49,7 +49,7 @@ const FormularioParent = ({
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>RG:</label>
+          <label>{isRequired && "* "}RG:</label>
           <ReactInputMask
             onChange={onChange}
             name="rg"
@@ -58,7 +58,7 @@ const FormularioParent = ({
         </div>
 
         <div className="student-form-field-container">
-          <label>CPF:</label>
+          <label>{isRequired && "* "}CPF:</label>
           <ReactInputMask
             onChange={onChange}
             name="cpf"
@@ -69,7 +69,7 @@ const FormularioParent = ({
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>Profissao:</label>
+          <label>{isRequired && "* "}Profissao:</label>
           <input
             onChange={onChange}
             name="profissao"
@@ -78,7 +78,7 @@ const FormularioParent = ({
         </div>
 
         <div className="student-form-field-container">
-          <label>Local de trabalho:</label>
+          <label>{isRequired && "* "}Local de trabalho:</label>
           <input
             onChange={onChange}
             name="localTrabalho"
@@ -87,14 +87,14 @@ const FormularioParent = ({
         </div>
 
         <div className="student-form-field-container">
-          <label>Cargo:</label>
+          <label>{isRequired && "* "}Cargo:</label>
           <input onChange={onChange} name="cargo" value={dadosParent.cargo} />
         </div>
       </div>
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>Telefone:</label>
+          <label>{isRequired && "* "}Telefone:</label>
           <ReactInputMask
             mask="(99) 99999-9999"
             placeholder="( _ ) _____-____"
@@ -105,7 +105,7 @@ const FormularioParent = ({
         </div>
 
         <div className="student-form-field-container">
-          <label>Celular:</label>
+          <label>{isRequired && "* "}Celular:</label>
           <ReactInputMask
             mask="(99) 99999-9999"
             placeholder="( _ ) _____-____"
@@ -116,7 +116,7 @@ const FormularioParent = ({
         </div>
 
         <div className="student-form-field-container">
-          <label>E-mail:</label>
+          <label>{isRequired && "* "}E-mail:</label>
           <input onChange={onChange} name="email" value={dadosParent.email} />
         </div>
       </div>

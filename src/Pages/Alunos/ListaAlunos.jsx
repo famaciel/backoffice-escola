@@ -28,7 +28,6 @@ const ListaAlunos = () => {
   };
 
   const loadStudents = useCallback(async () => {
-    console.log(search);
     setAlunos(null);
 
     const { data: alunos } = await axios.get(

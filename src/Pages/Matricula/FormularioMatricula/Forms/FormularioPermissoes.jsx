@@ -3,8 +3,6 @@ import { useCallback } from "react";
 const FormularioPermissoes = ({ matricula: { seguranca }, onChangeValue }) => {
   const onChange = useCallback(
     ({ target: { name, value } }) => {
-      console.log(name, value);
-
       onChangeValue({
         seguranca: {
           ...seguranca,
@@ -17,8 +15,6 @@ const FormularioPermissoes = ({ matricula: { seguranca }, onChangeValue }) => {
 
   const onChangePermissaoPessoa = useCallback(
     ({ target: { name, value } }, index) => {
-      console.log(name, value);
-
       const newPessoas = seguranca.pessoas;
 
       if (!newPessoas[index]) newPessoas.push({});

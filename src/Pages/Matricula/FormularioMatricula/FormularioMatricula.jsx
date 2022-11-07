@@ -17,13 +17,107 @@ import ReactLoading from "react-loading";
 import InfoDocumentos from "./Forms/InfoDocumentos";
 import DownloadDocuments from "./Forms/DownloadDocuments";
 import logo from "../../../Utils/logo.jpg";
-import { set } from "lodash";
+
+const formEmptyFields = {
+  mae: {
+    contatoPrincipal: "",
+    rg: "",
+    cpf: "",
+    profissao: "",
+    nome: "",
+    dataNascimento: "",
+    cargo: "",
+    email: "",
+    localTrabalho: "",
+    contatoCelular: "",
+  },
+  integral: {
+    opcao: false,
+    qtdeDias: 0,
+  },
+  dadosGerais: {
+    nome: "",
+    estado: "",
+    dataNascimento: "",
+    sexo: "",
+    endereco: {
+      contatoResidencial: "",
+      numero: "",
+      contatoRecado: "",
+      bairro: "",
+      rua: "",
+      cep: "",
+    },
+    naturalDe: "",
+  },
+  respFinanceiro: {
+    contatoPrincipal: "",
+    rg: "",
+    cpf: "",
+    profissao: "",
+    nome: "",
+    dataNascimento: "",
+    cargo: "",
+    email: "",
+    localTrabalho: "",
+    contatoCelular: "",
+  },
+  pai: {
+    contatoPrincipal: "",
+    rg: "",
+    cpf: "",
+    profissao: "",
+    nome: "",
+    dataNascimento: "",
+    cargo: "",
+    email: "",
+    localTrabalho: "",
+    contatoCelular: "",
+  },
+  seguranca: {
+    observacoes: "",
+    pessoas: [
+      {
+        nome: "",
+        parentesco: "",
+      },
+      {
+        nome: "",
+        parentesco: "",
+      },
+      {
+        nome: "",
+        parentesco: "",
+      },
+    ],
+  },
+  autorizacoes: {
+    medicamentosUsoContinuo: "",
+    observacoes: "",
+    pessoas: [
+      {
+        contato: "",
+        nome: "",
+      },
+      {
+        contato: "",
+        nome: "",
+      },
+      {
+        contato: "",
+        nome: "",
+      },
+    ],
+    restricaoAlimentar: "",
+    tipoSanguineo: "",
+    alergias: "",
+  },
+};
 
 const FormularioMatricula = () => {
-  const [matricula, setMatricula] = useState(null);
+  const [matricula, setMatricula] = useState(formEmptyFields);
   const [student, setStudent] = useState(null);
   const [filesToDownload, setFilesToDownload] = useState([]);
-  const [isMobile] = useState(window.innerWidth <= 768);
 
   const [submitLoading, setSubmitLoading] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
@@ -32,6 +126,23 @@ const FormularioMatricula = () => {
   const [step, setStep] = useState(0);
 
   const { studentId } = useParams();
+
+  const getStepValidation = useCallback(
+    (step) => {
+      const stepFields = {
+        0: {
+          fields: [matricula.dadosGerais, matricula.dadosGerais.endereco],
+          optionalFields: ["contatoRecado"],
+        },
+        2: {
+          fields: [matricula.respFinanceiro],
+        },
+      };
+
+      return stepFields[step];
+    },
+    [matricula]
+  );
 
   const onChangeValue = useCallback(
     (value) => {
@@ -73,18 +184,8 @@ const FormularioMatricula = () => {
         ),
       ]);
 
-      console.log(student, cabecalho, matricula);
-
       if (matricula.statusCode === 404) {
-        matricula = {
-          dadosGerais: { endereco: {} },
-          mae: {},
-          pai: {},
-          respFinanceiro: {},
-          integral: {},
-          seguranca: { pessoas: [] },
-          autorizacoes: { pessoas: [] },
-        };
+        matricula = formEmptyFields;
       }
 
       setStudent(student);
@@ -129,8 +230,6 @@ const FormularioMatricula = () => {
     }
   };
 
-  console.log(initialLoading);
-
   if (initialLoading || !matricula || !student) {
     return (
       <div className="submit-loading-container">
@@ -174,7 +273,37 @@ const FormularioMatricula = () => {
     scrollToTop();
   };
 
+  const validateFields = () => {
+    console.log(matricula);
+    const stepValidation = getStepValidation(step);
+
+    if (!stepValidation) return true;
+
+    const { fields: fieldsToValidate, optionalFields } = stepValidation;
+
+    let invalidFields = [];
+
+    fieldsToValidate.forEach((objField) => {
+      const _invalidFields = Object.keys(objField).filter(
+        (field) => !objField[field] && !(optionalFields || []).includes(field)
+      );
+
+      invalidFields = [...invalidFields, ..._invalidFields];
+    });
+
+    console.log(invalidFields);
+
+    return invalidFields.length === 0;
+  };
+
   const onNextStep = () => {
+    const isValid = validateFields();
+
+    if (!isValid) {
+      alert("Por favor, preencha todos os campos obrigatórios (*)");
+      return;
+    }
+
     if (step === 4 && !matricula.cabecalho.temIntegral) {
       return setStep(step + 2);
     }

@@ -46,8 +46,6 @@ const CadastroAluno = ({ closeForm, nucleos, student: studentToUpdate }) => {
         .replace("-", "");
     }
 
-    console.log(name, value);
-
     setStudent({
       ...student,
       [name]: value,

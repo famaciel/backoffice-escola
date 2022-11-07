@@ -7,8 +7,6 @@ const FormularioEmergencial = ({
 }) => {
   const onChange = useCallback(
     ({ target: { name, value } }) => {
-      console.log(name, value);
-
       onChangeValue({
         autorizacoes: {
           ...autorizacoes,
@@ -21,8 +19,6 @@ const FormularioEmergencial = ({
 
   const onChangePermissaoPessoa = useCallback(
     ({ target: { name, value } }, index) => {
-      console.log(name, value);
-
       const newPessoas = autorizacoes.pessoas;
 
       if (!newPessoas[index]) newPessoas.push({});

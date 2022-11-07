@@ -8,8 +8,6 @@ const FormularioStudent = ({
 }) => {
   const onChangeDadosGerais = useCallback(
     ({ target: { name, value } }) => {
-      console.log(name, value);
-
       onChangeValue({
         dadosGerais: {
           ...dadosGerais,
@@ -84,7 +82,7 @@ const FormularioStudent = ({
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>Nome:</label>
+          <label>* Nome:</label>
           <input
             name="nome"
             onChange={onChangeDadosGerais}
@@ -93,7 +91,7 @@ const FormularioStudent = ({
         </div>
 
         <div className="student-form-field-container">
-          <label>Data de nascimento:</label>
+          <label>* Data de nascimento:</label>
           <ReactInputMask
             placeholder="__/__/_____"
             mask="99/99/9999"
@@ -104,7 +102,7 @@ const FormularioStudent = ({
         </div>
 
         <div className="student-form-field-container">
-          <label>Sexo</label>
+          <label>* Sexo</label>
           <div>
             <input
               onChange={onChangeDadosGerais}
@@ -128,7 +126,7 @@ const FormularioStudent = ({
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>Natural de:</label>
+          <label>* Natural de:</label>
           <input
             name="naturalDe"
             onChange={onChangeDadosGerais}
@@ -137,7 +135,7 @@ const FormularioStudent = ({
         </div>
 
         <div className="student-form-field-container">
-          <label>Estado:</label>
+          <label>* Estado:</label>
           <input
             name="estado"
             onChange={onChangeDadosGerais}
@@ -148,7 +146,7 @@ const FormularioStudent = ({
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>Endereço residencial:</label>
+          <label>* Endereço residencial:</label>
           <input
             name="rua"
             onChange={onChangeEndereco}
@@ -157,7 +155,7 @@ const FormularioStudent = ({
         </div>
 
         <div className="student-form-field-container">
-          <label>Numero:</label>
+          <label>* Numero:</label>
           <input
             type="number"
             name="numero"
@@ -169,7 +167,7 @@ const FormularioStudent = ({
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>Bairro:</label>
+          <label>* Bairro:</label>
           <input
             name="bairro"
             onChange={onChangeEndereco}
@@ -178,7 +176,7 @@ const FormularioStudent = ({
         </div>
 
         <div className="student-form-field-container">
-          <label>CEP:</label>
+          <label>* CEP:</label>
           <input
             name="cep"
             onChange={onChangeEndereco}
@@ -189,7 +187,7 @@ const FormularioStudent = ({
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>Telefone Residencial:</label>
+          <label>* Telefone Residencial:</label>
           <ReactInputMask
             mask="(99) 99999-9999"
             name="contatoResidencial"

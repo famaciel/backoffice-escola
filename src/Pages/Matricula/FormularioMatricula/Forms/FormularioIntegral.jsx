@@ -12,7 +12,6 @@ const FormularioIntegral = ({
   matricula: { cabecalho, integral },
   onChangeValue,
 }) => {
-  console.log(cabecalho);
   const onSelectIntegralDays = useCallback(
     (e) => {
       onChangeValue({
