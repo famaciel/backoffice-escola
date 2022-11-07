@@ -152,8 +152,9 @@ const FormularioMatricula = () => {
   if (submitSuccess) {
     return (
       <div className="submit-loading-container">
-        <h1>Matrícula enviada com sucesso!</h1>
-        <p>A lista de materiais será enviada em janeiros de 2023 via e-mail</p>
+        <h1>Cadastro enviado com sucesso!</h1>
+        <p>Atenção: para efetivação da matrícula os responsáveis deverão comparecer ao setor financeiro da escola até a data limite - 25/11/2022</p>
+        <p>A lista de materiais será enviada em janeiro de 2023 via e-mail</p>
         <FontAwesomeIcon icon={faCheck} color="#2684ff" size="5x" />
       </div>
     );
