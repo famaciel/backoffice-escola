@@ -77,6 +77,7 @@ const FormularioIntegral = ({
           <label>Anuidade:</label>
           <CurrencyInput
             decimalsLimit={2}
+            decimalScale={2}
             prefix="R$ "
             disabled
             name="anuidade"
