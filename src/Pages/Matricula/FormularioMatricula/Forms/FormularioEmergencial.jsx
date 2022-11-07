@@ -74,13 +74,13 @@ const FormularioEmergencial = ({
           />
         </div>
         <div className="double-input-container">
-          <ReactInputMask
-            mask="(99) 99999-9999"
+          <input
             name="nome"
             onChange={(e) => onChangePermissaoPessoa(e, 2)}
             value={autorizacoes.pessoas[2]?.nome}
           />
-          <input
+          <ReactInputMask
+            mask="(99) 99999-9999"
             name="contato"
             placeholder="( ) _____-____"
             onChange={(e) => onChangePermissaoPessoa(e, 2)}
