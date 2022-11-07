@@ -132,7 +132,7 @@ const FormularioMatricula = () => {
       const stepFields = {
         0: {
           fields: [matricula.dadosGerais, matricula.dadosGerais.endereco],
-          optionalFields: ["contatoRecado"],
+          optionalFields: ["contatoResidencial", "contatoRecado"],
         },
         2: {
           fields: [matricula.respFinanceiro],

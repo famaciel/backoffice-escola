@@ -189,7 +189,7 @@ const FormularioStudent = ({
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>* Telefone Residencial:</label>
+          <label>Telefone Residencial:</label>
           <ReactInputMask
             mask="(99) 99999-9999"
             name="contatoResidencial"
