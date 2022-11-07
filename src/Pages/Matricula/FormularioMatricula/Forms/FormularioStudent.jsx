@@ -71,6 +71,7 @@ const FormularioStudent = ({
           <CurrencyInput
             disabled
             decimalsLimit={2}
+            decimalScale={2}
             prefix="R$ "
             name="taxas"
             value={cabecalho.valorTaxas}
