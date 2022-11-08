@@ -6,12 +6,17 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import ListaAlunos from "./Pages/Alunos/ListaAlunos";
 import Menu from "./Components/Menu/Menu";
 import FormularioMatricula from "./Pages/Matricula/FormularioMatricula/FormularioMatricula";
+import Home from "./Pages/Home/Home";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <Home />,
+  },
+  {
+    path: "/bsackoffice",
     element: <ListaAlunos />,
   },
   {
