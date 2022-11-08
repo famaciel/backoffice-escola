@@ -136,6 +136,7 @@ const FormularioMatricula = () => {
         },
         2: {
           fields: [matricula.respFinanceiro],
+          optionalFields: ["contatoPrincipal"]
         },
       };
 

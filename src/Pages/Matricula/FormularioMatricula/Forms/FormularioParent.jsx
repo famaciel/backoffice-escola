@@ -94,10 +94,10 @@ const FormularioParent = ({
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>{isRequired && "* "}Telefone:</label>
+          <label>Telefone:</label>
           <ReactInputMask
-            mask="(99) 99999-9999"
-            placeholder="( _ ) _____-____"
+            mask="(99) 9999-9999"
+            placeholder="( _ ) ____-____"
             name="contatoPrincipal"
             onChange={onChange}
             value={dadosParent.contatoPrincipal}
