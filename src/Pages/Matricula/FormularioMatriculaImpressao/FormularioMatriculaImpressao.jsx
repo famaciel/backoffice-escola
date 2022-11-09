@@ -359,12 +359,33 @@ const FormularioMatriculaImpressao = () => {
             onChangeValue={onChangeValue}
           />
 
-<InfoDocumentos />
+        <div className="student-form-row">
+          <div className="student-form-field-container">
+            <label>Florianópolis, ______ de _________________________ de ____</label>
+          </div>
+        </div>
 
-<DownloadDocuments filesToDownload={filesToDownload} />
+        <div className="student-form-row">
+          <div className="student-form-field-container">
+            <label>________________________________________</label>
+          </div>
+          <div className="student-form-field-container">
+            <label>________________________________________</label>
+          </div>
+        </div>
+
+        <div className="student-form-row">
+          <div className="student-form-field-container">
+            <label>Responsável Financeiro</label>
+          </div>
+          <div className="student-form-field-container">
+            <label>Responsável Acadêmico</label>
+          </div>
+        </div>
+
       </div>
       <div className="formulario-matricula-buttons">
-        footer
+        
       </div>
     </div>
   );
