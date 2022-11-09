@@ -8,6 +8,7 @@ import Menu from "./Components/Menu/Menu";
 import FormularioMatricula from "./Pages/Matricula/FormularioMatricula/FormularioMatricula";
 import Home from "./Pages/Home/Home";
 import FormularContrato from "./Pages/Contrato/FormularContrato/FormularContrato";
+import FormularioMatriculaIpressao from "./Pages/Matricula/FormularioMatriculaIpressao/FormularioMatriculaIpressao";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -27,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/contrato/:studentId",
     element: <FormularContrato />,
+  },
+  {
+    path: "/matricularimpressao/:studentId",
+    element: <FormularioMatriculaIpressao />,
   },
 ]);
 
