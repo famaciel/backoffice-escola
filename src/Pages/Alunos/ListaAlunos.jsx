@@ -269,6 +269,7 @@ const ListaAlunos = () => {
                       <button
                         onClick={(e) => openContrato(e, st)}
                         className="round-clickable-icon"
+                        disabled={!st.foiMatriculado}
                       >
                         <FontAwesomeIcon
                           size="lg"

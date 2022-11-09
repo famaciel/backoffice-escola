@@ -214,7 +214,7 @@ const FormularContrato = () => {
         </button>
       </div>
 
-      <h4>Calculo</h4>
+      <h4>Cálculo</h4>
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Parcelas:</label>
