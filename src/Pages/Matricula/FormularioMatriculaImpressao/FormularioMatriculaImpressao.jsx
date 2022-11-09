@@ -359,13 +359,19 @@ const FormularioMatriculaImpressao = () => {
             onChangeValue={onChangeValue}
           />
 
-        <div className="student-form-row" style="padding-top: 70px;">
+      <div className="student-form-row">
+          <div className="student-form-field-container">
+            <label> </label>
+          </div>
+        </div>
+
+        <div className="student-form-row">
           <div className="student-form-field-container">
             <label>Florianópolis, ______ de _________________________ de __________</label>
           </div>
         </div>
 
-        <div className="student-form-row" style="padding-top: 30px;">
+        <div className="student-form-row">
           <div className="student-form-field-container">
             <label>________________________________________</label>
           </div>
