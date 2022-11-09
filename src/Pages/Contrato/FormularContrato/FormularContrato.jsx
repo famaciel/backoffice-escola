@@ -154,12 +154,24 @@ const FormularContrato = () => {
           <div className="student-form-row">
             <div className="student-form-field-container">
               <label>Anuidade:</label>
-              <input disabled name="nucleo" value={contrato.valorAnuidade} />
+              {/* <input disabled name="nucleo" value={contrato.valorAnuidade} /> */}
+              <CurrencyInput disabled 
+                decimalsLimit={2}
+                decimalScale={2}
+                prefix="R$ "
+                value={contrato.valorAnuidade}
+              />
             </div>
 
             <div className="student-form-field-container">
               <label>Taxas:</label>
-              <input disabled name="nucleo" value={contrato.valorTaxas} />
+              {/* <input disabled name="nucleo" value={contrato.valorTaxas} /> */}
+              <CurrencyInput disabled 
+                decimalsLimit={2}
+                decimalScale={2}
+                prefix="R$ "
+                value={contrato.valorTaxas}
+              />
             </div>
           </div>
         </div>
@@ -219,17 +231,29 @@ const FormularContrato = () => {
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>Valor por parcela:</label>
-          <input
+          <label>Parcela Anuidade:</label>
+          {/* <input
             disabled
             name="parcelaAnuidade"
             value={contrato.parcelaAnuidade}
-          />
+          /> */}
+          <CurrencyInput disabled 
+                decimalsLimit={2}
+                decimalScale={2}
+                prefix="R$ "
+                value={contrato.parcelaAnuidade}
+              />
         </div>
 
         <div className="student-form-field-container">
-          <label>Taxa por parcela:</label>
-          <input disabled name="parcelaTaxas" value={contrato.parcelaTaxas} />
+          <label>Parcela Taxas:</label>
+          {/* <input disabled name="parcelaTaxas" value={contrato.parcelaTaxas} /> */}
+          <CurrencyInput disabled 
+                decimalsLimit={2}
+                decimalScale={2}
+                prefix="R$ "
+                value={contrato.parcelaTaxas}
+              />
         </div>
       </div>
     </div>
