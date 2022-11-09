@@ -321,40 +321,40 @@ const FormularioMatriculaImpressao = () => {
             onChangeValue={onChangeValue}
           />
 
-        <div className="matricula-form-fields">
-            <FormularioParent
+
+        <FormularioParent
               parentName="Mãe"
               parent="mae"
               dadosParent={matricula.mae}
               onChangeValue={onChangeValue}
             />
 
-            <FormularioParent
+        <FormularioParent
               parentName="Pai"
               parent="pai"
               dadosParent={matricula.pai}
               onChangeValue={onChangeValue}
             />
-          </div>
 
-          <FormularioParent
+
+        <FormularioParent
             parent="respFinanceiro"
             parentName="Responsável financeiro"
             dadosParent={matricula.respFinanceiro}
             onChangeValue={onChangeValue}
           />
 
-<FormularioEmergencial
+        <FormularioEmergencial
             matricula={matricula}
             onChangeValue={onChangeValue}
           />
 
-<FormularioPermissoes
+        <FormularioPermissoes
             matricula={matricula}
             onChangeValue={onChangeValue}
           />
 
-<FormularioIntegral
+        <FormularioIntegral
             matricula={matricula}
             onChangeValue={onChangeValue}
           />
