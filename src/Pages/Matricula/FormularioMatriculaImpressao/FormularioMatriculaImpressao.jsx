@@ -379,7 +379,7 @@ const FormularioMatriculaImpressao = () => {
 
         <div className="student-form-row">
           <div className="student-form-field-container">
-            <label>        Responsável Financeiro                     Responsável Acadêmico     </label>
+            <label>        Responsável Financeiro&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Responsável Acadêmico     </label>
           </div>
         </div>
 
