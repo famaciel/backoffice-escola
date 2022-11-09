@@ -6,6 +6,8 @@ import "./FormularContrato.scss";
 import FormularioParent from "../../Matricula/FormularioMatricula/Forms/FormularioParent";
 import FormularioIntegral from "../../Matricula/FormularioMatricula/Forms/FormularioIntegral";
 import ReactSelect from "react-select";
+import CurrencyInput from "react-currency-input-field";
+import ReactInputMask from "react-input-mask";
 
 const parcelaOptions = [
   {
@@ -154,7 +156,6 @@ const FormularContrato = () => {
           <div className="student-form-row">
             <div className="student-form-field-container">
               <label>Anuidade:</label>
-              {/* <input disabled name="nucleo" value={contrato.valorAnuidade} /> */}
               <CurrencyInput disabled 
                 decimalsLimit={2}
                 decimalScale={2}
@@ -165,7 +166,6 @@ const FormularContrato = () => {
 
             <div className="student-form-field-container">
               <label>Taxas:</label>
-              {/* <input disabled name="nucleo" value={contrato.valorTaxas} /> */}
               <CurrencyInput disabled 
                 decimalsLimit={2}
                 decimalScale={2}
@@ -231,12 +231,19 @@ const FormularContrato = () => {
 
       <div className="student-form-row">
         <div className="student-form-field-container">
+          <label>Anuidade - Final:</label>
+          <CurrencyInput disabled 
+                decimalsLimit={2}
+                decimalScale={2}
+                prefix="R$ "
+                value={contrato.valorAnuidadeFinal}
+              />
+        </div>
+      </div>
+
+      <div className="student-form-row">
+        <div className="student-form-field-container">
           <label>Parcela Anuidade:</label>
-          {/* <input
-            disabled
-            name="parcelaAnuidade"
-            value={contrato.parcelaAnuidade}
-          /> */}
           <CurrencyInput disabled 
                 decimalsLimit={2}
                 decimalScale={2}
@@ -247,7 +254,6 @@ const FormularContrato = () => {
 
         <div className="student-form-field-container">
           <label>Parcela Taxas:</label>
-          {/* <input disabled name="parcelaTaxas" value={contrato.parcelaTaxas} /> */}
           <CurrencyInput disabled 
                 decimalsLimit={2}
                 decimalScale={2}
@@ -256,6 +262,19 @@ const FormularContrato = () => {
               />
         </div>
       </div>
+
+      <div className="student-form-row">
+        <div className="student-form-field-container">
+          <label>Parcela - Final:</label>
+          <CurrencyInput disabled 
+                decimalsLimit={2}
+                decimalScale={2}
+                prefix="R$ "
+                value={contrato.parcelaFinal}
+              />
+        </div>
+      </div>
+
     </div>
   );
 };
