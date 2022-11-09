@@ -7,6 +7,7 @@ import ListaAlunos from "./Pages/Alunos/ListaAlunos";
 import Menu from "./Components/Menu/Menu";
 import FormularioMatricula from "./Pages/Matricula/FormularioMatricula/FormularioMatricula";
 import Home from "./Pages/Home/Home";
+import FormularContrato from "./Pages/Contrato/FormularContrato/FormularContrato";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -22,6 +23,10 @@ const router = createBrowserRouter([
   {
     path: "/matricular/:studentId",
     element: <FormularioMatricula />,
+  },
+  {
+    path: "/contrato/:studentId",
+    element: <FormularContrato />,
   },
 ]);
 

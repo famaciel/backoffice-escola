@@ -1,0 +1,21 @@
+.formulario-contrato {
+  align-items: center;
+  justify-content: center;
+  padding: 0 25%;
+  padding-bottom: 10%;
+
+  .matricula-form-fields {
+    width: 100%;
+  }
+}
+
+.calc-button {
+  height: 100%;
+  margin-top: 19px;
+  height: 40px;
+  background-color: white;
+  color: #2684ff;
+  border: 1px solid #2684ff;
+  cursor: pointer;
+  border-radius: 4px;
+}

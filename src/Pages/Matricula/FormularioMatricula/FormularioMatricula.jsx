@@ -159,12 +159,6 @@ const FormularioMatricula = () => {
     try {
       setInitialLoading(true);
 
-      await new Promise((resolve) => {
-        setTimeout(() => {
-          resolve(null);
-        }, 3000);
-      });
-
       let [
         { data: student },
         { data: cabecalho },

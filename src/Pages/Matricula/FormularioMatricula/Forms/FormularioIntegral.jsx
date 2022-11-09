@@ -11,6 +11,8 @@ const integralOptions = [
 const FormularioIntegral = ({
   matricula: { cabecalho, integral },
   onChangeValue,
+  isContrato,
+  readonly,
 }) => {
   const onSelectIntegralDays = useCallback(
     (e) => {
@@ -26,8 +28,8 @@ const FormularioIntegral = ({
   );
 
   useEffect(() => {
-    onSelectIntegralDays({ value: integral.qtdeDias });
-  }, [onSelectIntegralDays, integral.qtdeDias]);
+    if (!isContrato) onSelectIntegralDays({ value: integral.qtdeDias });
+  }, [onSelectIntegralDays, integral.qtdeDias, isContrato]);
 
   const onChangeIntegralOpcao = (e) => {
     const newValue = {
@@ -57,6 +59,7 @@ const FormularioIntegral = ({
             onChange={onChangeIntegralOpcao}
             name="temIrmao"
             checked={integral.opcao}
+            disabled={readonly}
           />
         </div>
 
@@ -67,12 +70,13 @@ const FormularioIntegral = ({
               options={integralOptions}
               onChange={onSelectIntegralDays}
               value={integralOptions.find((a) => a.value === integral.qtdeDias)}
+              disabled={readonly}
             />
           </div>
         )}
       </div>
 
-      {integral.qtdeDias ? (
+      {integral.qtdeDias && !isContrato ? (
         <div className="student-form-field-container">
           <label>Anuidade:</label>
           <CurrencyInput

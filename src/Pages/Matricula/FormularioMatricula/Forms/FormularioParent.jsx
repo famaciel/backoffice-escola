@@ -6,6 +6,8 @@ const FormularioParent = ({
   parent,
   parentName,
   onChangeValue,
+  isContrato,
+  readonly,
 }) => {
   const onChange = useCallback(
     ({ target: { name, value } }) => {
@@ -32,19 +34,27 @@ const FormularioParent = ({
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>{isRequired && "* "}Nome:</label>
-          <input onChange={onChange} name="nome" value={dadosParent.nome} />
-        </div>
-
-        <div className="student-form-field-container">
-          <label>{isRequired && "* "}Data de nascimento:</label>
-          <ReactInputMask
-            placeholder="__/__/_____"
-            mask="99/99/9999"
-            name="dataNascimento"
+          <input
+            disabled={readonly}
             onChange={onChange}
-            value={dadosParent.dataNascimento}
+            name="nome"
+            value={dadosParent.nome}
           />
         </div>
+
+        {!isContrato && (
+          <div className="student-form-field-container">
+            <label>{isRequired && "* "}Data de nascimento:</label>
+            <ReactInputMask
+              placeholder="__/__/_____"
+              mask="99/99/9999"
+              name="dataNascimento"
+              onChange={onChange}
+              value={dadosParent.dataNascimento}
+              disabled={readonly}
+            />
+          </div>
+        )}
       </div>
 
       <div className="student-form-row">
@@ -54,6 +64,7 @@ const FormularioParent = ({
             onChange={onChange}
             name="rg"
             value={dadosParent.rg}
+            disabled={readonly}
           />
         </div>
 
@@ -63,63 +74,82 @@ const FormularioParent = ({
             onChange={onChange}
             name="cpf"
             value={dadosParent.cpf}
+            disabled={readonly}
           />
         </div>
       </div>
 
-      <div className="student-form-row">
-        <div className="student-form-field-container">
-          <label>{isRequired && "* "}Profissao:</label>
-          <input
-            onChange={onChange}
-            name="profissao"
-            value={dadosParent.profissao}
-          />
-        </div>
+      {!isContrato && (
+        <>
+          <div className="student-form-row">
+            <div className="student-form-field-container">
+              <label>{isRequired && "* "}Profissao:</label>
+              <input
+                onChange={onChange}
+                name="profissao"
+                value={dadosParent.profissao}
+                disabled={readonly}
+              />
+            </div>
 
-        <div className="student-form-field-container">
-          <label>{isRequired && "* "}Local de trabalho:</label>
-          <input
-            onChange={onChange}
-            name="localTrabalho"
-            value={dadosParent.localTrabalho}
-          />
-        </div>
+            <div className="student-form-field-container">
+              <label>{isRequired && "* "}Local de trabalho:</label>
+              <input
+                onChange={onChange}
+                name="localTrabalho"
+                value={dadosParent.localTrabalho}
+                disabled={readonly}
+              />
+            </div>
 
-        <div className="student-form-field-container">
-          <label>{isRequired && "* "}Cargo:</label>
-          <input onChange={onChange} name="cargo" value={dadosParent.cargo} />
-        </div>
-      </div>
+            <div className="student-form-field-container">
+              <label>{isRequired && "* "}Cargo:</label>
+              <input
+                onChange={onChange}
+                name="cargo"
+                value={dadosParent.cargo}
+                disabled={readonly}
+              />
+            </div>
+          </div>
 
-      <div className="student-form-row">
-        <div className="student-form-field-container">
-          <label>Telefone:</label>
-          <ReactInputMask
-            mask="(99) 9999-9999"
-            placeholder="( _ ) ____-____"
-            name="contatoPrincipal"
-            onChange={onChange}
-            value={dadosParent.contatoPrincipal}
-          />
-        </div>
+          <div className="student-form-row">
+            <div className="student-form-field-container">
+              <label>Telefone:</label>
+              <ReactInputMask
+                mask="(99) 99999-9999"
+                placeholder="( _ ) _____-____"
+                name="contatoPrincipal"
+                onChange={onChange}
+                value={dadosParent.contatoPrincipal}
+                disabled={readonly}
+              />
+            </div>
 
-        <div className="student-form-field-container">
-          <label>{isRequired && "* "}Celular:</label>
-          <ReactInputMask
-            mask="(99) 99999-9999"
-            placeholder="( _ ) _____-____"
-            name="contatoCelular"
-            onChange={onChange}
-            value={dadosParent.contatoCelular}
-          />
-        </div>
+            <div className="student-form-field-container">
+              <label>{isRequired && "* "}Celular:</label>
+              <ReactInputMask
+                mask="(99) 99999-9999"
+                placeholder="( _ ) _____-____"
+                name="contatoCelular"
+                onChange={onChange}
+                value={dadosParent.contatoCelular}
+                disabled={readonly}
+              />
+            </div>
 
-        <div className="student-form-field-container">
-          <label>{isRequired && "* "}E-mail:</label>
-          <input onChange={onChange} name="email" value={dadosParent.email} />
-        </div>
-      </div>
+            <div className="student-form-field-container">
+              <label>{isRequired && "* "}E-mail:</label>
+              <input
+                onChange={onChange}
+                name="email"
+                value={dadosParent.email}
+                disabled={readonly}
+              />
+            </div>
+          </div>
+        </>
+      )}
     </div>
   );
 };

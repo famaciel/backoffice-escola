@@ -97,6 +97,11 @@ const ListaAlunos = () => {
     window.open(`/matricular/${student.id}`, "_blank");
   };
 
+  const openContrato = (e, student) => {
+    e.stopPropagation(0);
+    window.open(`/contrato/${student.id}`, "_blank");
+  };
+
   return (
     <div>
       <div className="students-header">
@@ -252,6 +257,23 @@ const ListaAlunos = () => {
                           className="whatsapp-icon"
                           src={whatsappLogo}
                           alt="Logo whatsapp"
+                        />
+                      </button>
+                    </Tooltip>
+
+                    <Tooltip
+                      enterDelay={100}
+                      leaveDelay={0}
+                      title="Gerar contrato"
+                    >
+                      <button
+                        onClick={(e) => openContrato(e, st)}
+                        className="round-clickable-icon"
+                      >
+                        <FontAwesomeIcon
+                          size="lg"
+                          color="#2684ff"
+                          icon={faFilePen}
                         />
                       </button>
                     </Tooltip>
