@@ -6,8 +6,9 @@ import "./FormularContrato.scss";
 import FormularioParent from "../../Matricula/FormularioMatricula/Forms/FormularioParent";
 import FormularioIntegral from "../../Matricula/FormularioMatricula/Forms/FormularioIntegral";
 import ReactSelect from "react-select";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 import CurrencyInput from "react-currency-input-field";
-import ReactInputMask from "react-input-mask";
 
 const parcelaOptions = [
   {
@@ -105,18 +106,31 @@ const FormularContrato = () => {
     [calculate, contrato]
   );
 
+  const onSubmit = useCallback(async () => {
+    try {
+      setSubmitLoading(true);
+
+      await Promise.all([
+        axios.post(
+          `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/contrato`,
+          {
+            id: studentId,
+            ...contrato,
+          }
+        ),
+      ]);
+
+      setSubmitSuccess(true);
+    } catch (err) {
+      console.error("ERROR: ", err);
+    } finally {
+      setSubmitLoading(false);
+    }
+  }, [studentId, contrato]);
+
   useEffect(() => {
     loadContrato();
   }, [loadContrato]);
-
-  if (initialLoading || !contrato) {
-    return (
-      <div className="submit-loading-container">
-        <h1>Carregando contrato...</h1>
-        <ReactLoading type="bars" color="#2684ff" height={50} width={50} />
-      </div>
-    );
-  }
 
   const onChangeDesconto = ({ target: { name, value } }) => {
     const newContrato = {
@@ -135,6 +149,33 @@ const FormularContrato = () => {
       ...newContrato,
     });
   };
+
+  if (initialLoading || !contrato) {
+    return (
+      <div className="submit-loading-container">
+        <h1>Carregando contrato...</h1>
+        <ReactLoading type="bars" color="#2684ff" height={50} width={50} />
+      </div>
+    );
+  }
+
+  if (submitLoading) {
+    return (
+      <div className="submit-loading-container">
+        <h1>Registrando contrato...</h1>
+        <ReactLoading type="bars" color="#2684ff" height={50} width={50} />
+      </div>
+    );
+  }
+
+  if (submitSuccess) {
+    return (
+      <div className="submit-loading-container">
+        <h1>Contrato cadastrado com sucesso!</h1>
+        <FontAwesomeIcon icon={faCheck} color="#2684ff" size="5x" />
+      </div>
+    );
+  }
 
   return (
     <div className="formulario-contrato">
@@ -156,7 +197,8 @@ const FormularContrato = () => {
           <div className="student-form-row">
             <div className="student-form-field-container">
               <label>Anuidade:</label>
-              <CurrencyInput disabled 
+              <CurrencyInput
+                disabled
                 decimalsLimit={2}
                 decimalScale={2}
                 prefix="R$ "
@@ -166,7 +208,8 @@ const FormularContrato = () => {
 
             <div className="student-form-field-container">
               <label>Taxas:</label>
-              <CurrencyInput disabled 
+              <CurrencyInput
+                disabled
                 decimalsLimit={2}
                 decimalScale={2}
                 prefix="R$ "
@@ -232,49 +275,58 @@ const FormularContrato = () => {
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Anuidade - Final:</label>
-          <CurrencyInput disabled 
-                decimalsLimit={2}
-                decimalScale={2}
-                prefix="R$ "
-                value={contrato.valorAnuidadeFinal}
-              />
+          <CurrencyInput
+            disabled
+            decimalsLimit={2}
+            decimalScale={2}
+            prefix="R$ "
+            value={contrato.valorAnuidadeFinal}
+          />
         </div>
       </div>
 
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Parcela Anuidade:</label>
-          <CurrencyInput disabled 
-                decimalsLimit={2}
-                decimalScale={2}
-                prefix="R$ "
-                value={contrato.parcelaAnuidade}
-              />
+          <CurrencyInput
+            disabled
+            decimalsLimit={2}
+            decimalScale={2}
+            prefix="R$ "
+            value={contrato.parcelaAnuidade}
+          />
         </div>
 
         <div className="student-form-field-container">
           <label>Parcela Taxas:</label>
-          <CurrencyInput disabled 
-                decimalsLimit={2}
-                decimalScale={2}
-                prefix="R$ "
-                value={contrato.parcelaTaxas}
-              />
+          <CurrencyInput
+            disabled
+            decimalsLimit={2}
+            decimalScale={2}
+            prefix="R$ "
+            value={contrato.parcelaTaxas}
+          />
         </div>
       </div>
 
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Parcela - Final:</label>
-          <CurrencyInput disabled 
-                decimalsLimit={2}
-                decimalScale={2}
-                prefix="R$ "
-                value={contrato.parcelaFinal}
-              />
+          <CurrencyInput
+            disabled
+            decimalsLimit={2}
+            decimalScale={2}
+            prefix="R$ "
+            value={contrato.parcelaFinal}
+          />
         </div>
       </div>
 
+      <div className="contrato-footer">
+        <button className="custom-button" onClick={onSubmit}>
+          Cadastrar
+        </button>
+      </div>
     </div>
   );
 };
