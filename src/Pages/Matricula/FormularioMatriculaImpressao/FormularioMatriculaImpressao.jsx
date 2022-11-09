@@ -373,19 +373,13 @@ const FormularioMatriculaImpressao = () => {
 
         <div className="student-form-row">
           <div className="student-form-field-container">
-            <label>________________________________________</label>
-          </div>
-          <div className="student-form-field-container">
-            <label>________________________________________</label>
+            <label>________________________________________   ________________________________________</label>
           </div>
         </div>
 
         <div className="student-form-row">
           <div className="student-form-field-container">
-            <label>Resp. Financeiro</label>
-          </div>
-          <div className="student-form-field-container">
-            <label>Resp. Acadêmico</label>
+            <label>        Responsável Financeiro                     Responsável Acadêmico     </label>
           </div>
         </div>
 
