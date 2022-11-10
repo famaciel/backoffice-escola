@@ -164,11 +164,9 @@ const FormularContrato = () => {
 
   const onChange = useCallback(
     ({ target: { name, value } }) => {
-      onChangeValue({
-        contrato: {
-          ...contrato,
-          [name]: value,
-        },
+      setContrato({
+        ...contrato,
+        [name]: value,
       });
     }
   );
