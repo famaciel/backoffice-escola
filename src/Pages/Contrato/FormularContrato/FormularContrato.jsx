@@ -156,7 +156,7 @@ const FormularContrato = () => {
 
       calculateTaxas({
         ...contrato,
-        parcelamento: value,
+        parcelamentoTaxas: value,
       });
     },
     [calculateTaxas, contrato]
