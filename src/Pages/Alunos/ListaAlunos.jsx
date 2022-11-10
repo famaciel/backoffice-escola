@@ -7,7 +7,12 @@ import ReactLoading from "react-loading";
 import ReactSelect from "react-select";
 import { debounce } from "lodash";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faFile, faFilePen, faPrint } from "@fortawesome/free-solid-svg-icons";
+import {
+  faDownload,
+  faFile,
+  faFilePen,
+  faPrint
+} from "@fortawesome/free-solid-svg-icons";
 import Tooltip from "@mui/material/Tooltip";
 import whatsappLogo from "../../Utils/whatsapp.png";
 
@@ -105,6 +110,11 @@ const ListaAlunos = () => {
   const openMatriculaImpressao = (e, student) => {
     e.stopPropagation(0);
     window.open(`/matricularimpressao/${student.id}`, "_blank");
+  };
+
+  const openPreviewMatriculaImpressao = (e, student) => {
+    e.stopPropagation(0);
+    window.open(`/preview-matricula/${student.id}`, "_blank");
   };
 
   return (
@@ -298,6 +308,24 @@ const ListaAlunos = () => {
                           size="lg"
                           color="#2684ff"
                           icon={faFilePen}
+                        />
+                      </button>
+                    </Tooltip>
+
+                    <Tooltip
+                      enterDelay={100}
+                      leaveDelay={0}
+                      title="Imprimir matricula"
+                    >
+                      <button
+                        onClick={(e) => openPreviewMatriculaImpressao(e, st)}
+                        className="round-clickable-icon"
+                        disabled={!st.foiMatriculado}
+                      >
+                        <FontAwesomeIcon
+                          size="lg"
+                          color="#2684ff"
+                          icon={faDownload}
                         />
                       </button>
                     </Tooltip>
