@@ -5,7 +5,7 @@ import logo from "../../Utils/logo.jpg";
 const Menu = () => {
   const { pathname } = window.location;
 
-  if (pathname.includes("matricular")) return;
+  if (!pathname.includes("backoffice")) return;
 
   return (
     <div className="menu">

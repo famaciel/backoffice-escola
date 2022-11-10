@@ -1,0 +1,25 @@
+.matricula-form {
+  &.preview {
+    overflow: unset !important;
+
+    input,
+    textarea,
+    select,
+    .css-1s2u09g-control {
+      border: 0;
+      border-radius: 0;
+      pointer-events: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+
+    .matricula-form-fields {
+      width: 95%;
+    }
+
+    @media (max-width: 768px) {
+      .student-form-row {
+        flex-direction: row;
+      }
+    }
+  }
+}

@@ -1,3 +1,4 @@
+import React from "react";
 import {
   faArrowLeft,
   faArrowRight,
@@ -307,99 +308,105 @@ const FormularioMatricula = () => {
     scrollToTop();
   };
 
+  const ref = React.createRef();
+
   return (
     <div>
-      <div className="matricula-form">
-        <div className="matricula-form-header">
-          <img src={logo} alt="logo" />
-          <h2>Escola dos Sonhos</h2>
-          <h3>Ficha de matrícula 2023</h3>
-        </div>
-
-        {step === 0 && (
-          <FormularioStudent
-            matricula={matricula}
-            onChangeValue={onChangeValue}
-          />
-        )}
-
-        {step === 1 && (
-          <div className="matricula-form-fields">
-            <FormularioParent
-              parentName="Mãe"
-              parent="mae"
-              dadosParent={matricula.mae}
-              onChangeValue={onChangeValue}
-            />
-
-            <FormularioParent
-              parentName="Pai"
-              parent="pai"
-              dadosParent={matricula.pai}
-              onChangeValue={onChangeValue}
-            />
+      <div ref={ref}>
+        <div className="matricula-form">
+          <div className="matricula-form-header">
+            <img src={logo} alt="logo" />
+            <h2>Escola dos Sonhos</h2>
+            <h3>Ficha de matrícula 2023</h3>
           </div>
-        )}
 
-        {step === 2 && (
-          <FormularioParent
-            parent="respFinanceiro"
-            parentName="Responsável financeiro"
-            dadosParent={matricula.respFinanceiro}
-            onChangeValue={onChangeValue}
-          />
-        )}
+          {step === 0 && (
+            <FormularioStudent
+              matricula={matricula}
+              onChangeValue={onChangeValue}
+            />
+          )}
 
-        {step === 3 && (
-          <FormularioEmergencial
-            matricula={matricula}
-            onChangeValue={onChangeValue}
-          />
-        )}
+          {step === 1 && (
+            <div className="matricula-form-fields">
+              <FormularioParent
+                parentName="Mãe"
+                parent="mae"
+                dadosParent={matricula.mae}
+                onChangeValue={onChangeValue}
+              />
 
-        {step === 4 && (
-          <FormularioPermissoes
-            matricula={matricula}
-            onChangeValue={onChangeValue}
-          />
-        )}
+              <FormularioParent
+                parentName="Pai"
+                parent="pai"
+                dadosParent={matricula.pai}
+                onChangeValue={onChangeValue}
+              />
+            </div>
+          )}
 
-        {step === 5 && matricula.cabecalho.temIntegral && (
-          <FormularioIntegral
-            matricula={matricula}
-            onChangeValue={onChangeValue}
-          />
-        )}
+          {step === 2 && (
+            <FormularioParent
+              parent="respFinanceiro"
+              parentName="Responsável financeiro"
+              dadosParent={matricula.respFinanceiro}
+              onChangeValue={onChangeValue}
+            />
+          )}
 
-        {step === 6 && <InfoDocumentos />}
+          {step === 3 && (
+            <FormularioEmergencial
+              matricula={matricula}
+              onChangeValue={onChangeValue}
+            />
+          )}
 
-        {step === 7 && <DownloadDocuments filesToDownload={filesToDownload} />}
-      </div>
-      <div className="formulario-matricula-buttons">
-        {step > 0 && (
-          <button
-            onClick={onPreviousStep}
-            className="round-clickable-icon previous-step-button"
-          >
-            <FontAwesomeIcon icon={faArrowLeft} size="3x" />
-          </button>
-        )}
+          {step === 4 && (
+            <FormularioPermissoes
+              matricula={matricula}
+              onChangeValue={onChangeValue}
+            />
+          )}
 
-        {step === 7 ? (
-          <button
-            onClick={submitForm}
-            className="round-clickable-icon next-step-button"
-          >
-            <FontAwesomeIcon icon={faCheck} size="3x" />
-          </button>
-        ) : (
-          <button
-            onClick={onNextStep}
-            className="round-clickable-icon next-step-button"
-          >
-            <FontAwesomeIcon icon={faArrowRight} size="3x" />
-          </button>
-        )}
+          {step === 5 && matricula.cabecalho.temIntegral && (
+            <FormularioIntegral
+              matricula={matricula}
+              onChangeValue={onChangeValue}
+            />
+          )}
+
+          {step === 6 && <InfoDocumentos />}
+
+          {step === 7 && (
+            <DownloadDocuments filesToDownload={filesToDownload} />
+          )}
+        </div>
+        <div className="formulario-matricula-buttons">
+          {step > 0 && (
+            <button
+              onClick={onPreviousStep}
+              className="round-clickable-icon previous-step-button"
+            >
+              <FontAwesomeIcon icon={faArrowLeft} size="3x" />
+            </button>
+          )}
+
+          {step === 7 ? (
+            <button
+              onClick={submitForm}
+              className="round-clickable-icon next-step-button"
+            >
+              <FontAwesomeIcon icon={faCheck} size="3x" />
+            </button>
+          ) : (
+            <button
+              onClick={onNextStep}
+              className="round-clickable-icon next-step-button"
+            >
+              <FontAwesomeIcon icon={faArrowRight} size="3x" />
+            </button>
+          )}
+        </div>
       </div>
     </div>
   );

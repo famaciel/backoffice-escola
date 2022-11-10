@@ -9,6 +9,7 @@ import FormularioMatricula from "./Pages/Matricula/FormularioMatricula/Formulari
 import Home from "./Pages/Home/Home";
 import FormularContrato from "./Pages/Contrato/FormularContrato/FormularContrato";
 import FormularioMatriculaImpressao from "./Pages/Matricula/FormularioMatriculaImpressao/FormularioMatriculaImpressao";
+import MatriculaPreview from "./Pages/Matricula/Preview/MatriculaPreview";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
     path: "/matricularimpressao/:studentId",
     element: <FormularioMatriculaImpressao />,
   },
+  {
+    path: "/preview-matricula/:studentId",
+    element: <MatriculaPreview />,
+  }
 ]);
 
 root.render(
