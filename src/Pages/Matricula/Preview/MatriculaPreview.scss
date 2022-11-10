@@ -2,6 +2,11 @@
   &.preview {
     overflow: unset !important;
 
+    .matricula-form-header {
+      font-size: 1.4em;
+      margin-bottom: 30px;
+    }
+
     input,
     textarea,
     select,
@@ -10,6 +15,12 @@
       border-radius: 0;
       pointer-events: none;
       border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      font-size: 1.2em;
+    }
+
+    label,
+    h4 {
+      font-size: 1.4em;
     }
 
     .matricula-form-fields {
