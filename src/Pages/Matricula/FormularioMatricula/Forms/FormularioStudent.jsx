@@ -157,9 +157,8 @@ const FormularioStudent = ({
         </div>
 
         <div className="student-form-field-container">
-          <label>* Numero:</label>
+          <label>* Número/Complemento:</label>
           <input
-            type="number"
             name="numero"
             onChange={onChangeEndereco}
             value={dadosGerais.endereco.numero}
