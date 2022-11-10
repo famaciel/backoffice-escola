@@ -147,16 +147,16 @@ const MatriculaPreview = () => {
           <FormularioIntegral matricula={matricula} onChangeValue={() => {}} />
 
           <div style={{ marginTop: 60, paddingBottom: 60 }}>
-            <p style={{ textAlign: "center" }}>
+            <h3 style={{ textAlign: "center" }}>
               Florianópolis, ______ de _____________________ de _______
-            </p>
-            <p>
+            </h3>
+            <h3>
               _______________________________________
               _______________________________________
-            </p>
+            </h3>
             <div style={{ display: "flex", justifyContent: "space-around" }}>
-              <p>Responsável financeiro</p>
-              <p>Responsável Acadêmico</p>
+              <h3>Responsável Financeiro</h3>
+              <h3>Responsável Acadêmico</h3>
             </div>
           </div>
         </div>
