@@ -149,8 +149,8 @@ const MatriculaPreview = () => {
           <div
             style={{
               textAlign: "center",
-              marginTop: 60,
-              paddingBottom: 60,
+              marginTop: 40,
+              paddingBottom: 40,
               width: "80%",
               display: "flex",
               flexDirection: "column",
@@ -163,7 +163,7 @@ const MatriculaPreview = () => {
                 display: "flex",
                 justifyContent: "space-around",
                 width: "100%",
-                marginTop: 30,
+                marginTop: 10,
               }}
             >
               <div>
