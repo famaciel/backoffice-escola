@@ -162,6 +162,18 @@ const FormularContrato = () => {
     [calculateTaxas, contrato]
   );
 
+  const onChange = useCallback(
+    ({ target: { name, value } }) => {
+      onChangeValue({
+        contrato: {
+          ...contrato,
+          [name]: value,
+        },
+      });
+    },
+    [onChangeValue, contrato]
+  );
+
   const onSubmit = useCallback(async () => {
     try {
       setSubmitLoading(true);
@@ -351,9 +363,6 @@ const FormularContrato = () => {
         </div>
       </div>
 
-
-
-
       <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Parcelas Taxas:</label>
@@ -369,8 +378,6 @@ const FormularContrato = () => {
       </div>
 
       <div className="student-form-row">
-        
-
         <div className="student-form-field-container">
           <label>Parcela Taxas:</label>
           <CurrencyInput
@@ -388,6 +395,7 @@ const FormularContrato = () => {
           <label>Observações adicionais:</label>
           <textarea
             name="observacoes"
+            onChange={onChange}
             value={contrato.observacoes}
           />
         </div>
