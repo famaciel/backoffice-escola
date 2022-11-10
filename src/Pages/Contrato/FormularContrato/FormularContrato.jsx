@@ -29,6 +29,21 @@ const parcelaOptions = [
   },
 ];
 
+const parcelaTaxasOptions = [
+  {
+    label: "1x",
+    value: 1,
+  },
+  {
+    label: "2x",
+    value: 2,
+  },
+  {
+    label: "12x",
+    value: 12,
+  }
+];
+
 const FormularContrato = () => {
   const { studentId } = useParams();
 
@@ -91,6 +106,32 @@ const FormularContrato = () => {
     [studentId, contrato]
   );
 
+  const calculateTaxas = useCallback(
+    async (ct = contrato) => {
+      try {
+        let [{ data: calculo }] = await Promise.all([
+          axios.post(
+            `https://6ln1gs0gk9.execute-api.us-east-1.amazonaws.com/dev/contrato/calculotaxas`,
+            {
+              parcelamentoTaxas: ct.parcelamentoTaxas || 12,
+            }
+          ),
+        ]);
+
+        console.log(ct);
+        console.log(calculo);
+
+        setContrato({
+          ...ct,
+          ...calculo,
+        });
+      } catch (err) {
+        console.error("ERROR: ", err);
+      }
+    },
+    [studentId, contrato]
+  );
+
   const onChangeParcela = useCallback(
     ({ value }) => {
       setContrato({
@@ -104,6 +145,21 @@ const FormularContrato = () => {
       });
     },
     [calculate, contrato]
+  );
+
+  const onChangeParcelaTaxas = useCallback(
+    ({ value }) => {
+      setContrato({
+        ...contrato,
+        parcelamentoTaxas: value,
+      });
+
+      calculateTaxas({
+        ...contrato,
+        parcelamento: value,
+      });
+    },
+    [calculateTaxas, contrato]
   );
 
   const onSubmit = useCallback(async () => {
@@ -283,9 +339,6 @@ const FormularContrato = () => {
             value={contrato.valorAnuidadeFinal}
           />
         </div>
-      </div>
-
-      <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Parcela Anuidade:</label>
           <CurrencyInput
@@ -296,6 +349,27 @@ const FormularContrato = () => {
             value={contrato.parcelaAnuidade}
           />
         </div>
+      </div>
+
+
+
+
+      <div className="student-form-row">
+        <div className="student-form-field-container">
+          <label>Parcelas Taxas:</label>
+          <ReactSelect
+            options={parcelaTaxasOptions}
+            name="parcelamentoTaxas"
+            value={parcelaTaxasOptions.find(
+              (a) => a.value === contrato.parcelamentoTaxas
+            )}
+            onChange={onChangeParcelaTaxas}
+          />
+        </div>
+      </div>
+
+      <div className="student-form-row">
+        
 
         <div className="student-form-field-container">
           <label>Parcela Taxas:</label>
@@ -311,13 +385,10 @@ const FormularContrato = () => {
 
       <div className="student-form-row">
         <div className="student-form-field-container">
-          <label>Parcela - Final:</label>
-          <CurrencyInput
-            disabled
-            decimalsLimit={2}
-            decimalScale={2}
-            prefix="R$ "
-            value={contrato.parcelaFinal}
+          <label>Observações adicionais:</label>
+          <textarea
+            name="observacoes"
+            value={contrato.observacoes}
           />
         </div>
       </div>
