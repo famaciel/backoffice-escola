@@ -10,6 +10,7 @@ import Home from "./Pages/Home/Home";
 import FormularContrato from "./Pages/Contrato/FormularContrato/FormularContrato";
 import FormularioMatriculaImpressao from "./Pages/Matricula/FormularioMatriculaImpressao/FormularioMatriculaImpressao";
 import MatriculaPreview from "./Pages/Matricula/Preview/MatriculaPreview";
+import ContratoPreview from "./Pages/Contrato/ContratoPreview/ContratoPreview";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -29,6 +30,11 @@ const router = createBrowserRouter([
   {
     path: "/contrato/:studentId",
     element: <FormularContrato />,
+  },
+  ,
+  {
+    path: "/preview-contrato/:studentId",
+    element: <ContratoPreview />,
   },
   {
     path: "/matricularimpressao/:studentId",
