@@ -404,12 +404,13 @@ const FormularContrato = () => {
       </div>
 
       <div className="contrato-footer">
-        <button className="custom-button" onClick={onSubmit}>
-          Cadastrar
-        </button>
-        <button className="custom-button" 
+      <button className="custom-button" 
+        disabled={!contrato.temContrato}
           onClick={(e) => openPreviewContratoImpressao(e)}>
           Imprimir
+        </button>
+        <button className="custom-button" onClick={onSubmit}>
+          Cadastrar
         </button>
       </div>
     </div>
