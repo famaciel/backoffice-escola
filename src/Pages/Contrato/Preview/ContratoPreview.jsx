@@ -212,9 +212,6 @@ const ContratoPreview = () => {
             )}
           />
         </div>
-      </div>
-
-      <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Anuidade - Final:</label>
           <CurrencyInput
@@ -248,9 +245,6 @@ const ContratoPreview = () => {
             )}
           />
         </div>
-      </div>
-
-      <div className="student-form-row">
         <div className="student-form-field-container">
           <label>Parcela Taxas:</label>
           <CurrencyInput
