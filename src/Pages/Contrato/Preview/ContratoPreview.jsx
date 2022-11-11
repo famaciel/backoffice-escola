@@ -273,8 +273,8 @@ const ContratoPreview = () => {
           <div
             style={{
               textAlign: "center",
-              marginTop: 30,
-              paddingBottom: 30,
+              marginTop: 20,
+              paddingBottom: 20,
               width: "80%",
               display: "flex",
               flexDirection: "column",
