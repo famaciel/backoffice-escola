@@ -35,6 +35,29 @@ code {
   cursor: default;
 }
 
+.print-button {
+  height: 32px;
+  background-color: #f7e438;
+  color: white;
+  border: 0;
+  cursor: pointer;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.print-button:not([disabled]):hover {
+  background-color: #b9ac33;
+  transform: scale(1.05);
+  transition: 300ms;
+}
+
+.print-button:disabled {
+  background-color: gray;
+  cursor: default;
+}
+
 html,
 body,
 #root {
