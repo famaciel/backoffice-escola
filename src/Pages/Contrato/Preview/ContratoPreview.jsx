@@ -13,6 +13,41 @@ import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
 import CurrencyInput from "react-currency-input-field";
+import ReactSelect from "react-select";
+
+const parcelaOptions = [
+  {
+    label: "1x",
+    value: 1,
+  },
+  {
+    label: "2x",
+    value: 2,
+  },
+  {
+    label: "12x",
+    value: 12,
+  },
+  {
+    label: "13x",
+    value: 13,
+  },
+];
+
+const parcelaTaxasOptions = [
+  {
+    label: "1x",
+    value: 1,
+  },
+  {
+    label: "2x",
+    value: 2,
+  },
+  {
+    label: "12x",
+    value: 12,
+  }
+];
 
 const ContratoPreview = () => {
   const { studentId } = useParams();
@@ -119,7 +154,7 @@ const ContratoPreview = () => {
             </div>
 
             <div className="student-form-field-container">
-              <label>Taxas:</label>
+              <label>{contrato.termoTaxas}:</label>
               <CurrencyInput
                 disabled
                 decimalsLimit={2}
@@ -149,7 +184,6 @@ const ContratoPreview = () => {
           <input
             name="valor"
             type="number"
-            onChange={onChangeDesconto}
             value={contrato.desconto.valor}
           />
         </div>
@@ -159,7 +193,6 @@ const ContratoPreview = () => {
           <input
             type="number"
             name="porcentagem"
-            onChange={onChangeDesconto}
             value={contrato.desconto.porcentagem}
           />
         </div>
@@ -175,7 +208,6 @@ const ContratoPreview = () => {
             value={parcelaOptions.find(
               (a) => a.value === contrato.parcelamento
             )}
-            onChange={onChangeParcela}
           />
         </div>
       </div>
@@ -212,7 +244,6 @@ const ContratoPreview = () => {
             value={parcelaTaxasOptions.find(
               (a) => a.value === contrato.parcelamentoTaxas
             )}
-            onChange={onChangeParcelaTaxas}
           />
         </div>
       </div>
@@ -235,7 +266,6 @@ const ContratoPreview = () => {
           <label>Observações adicionais:</label>
           <textarea
             name="observacoes"
-            onChange={onChange}
             value={contrato.observacoes}
           />
         </div>

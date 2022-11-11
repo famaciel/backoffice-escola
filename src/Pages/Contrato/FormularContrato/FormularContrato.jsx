@@ -272,7 +272,7 @@ const FormularContrato = () => {
             </div>
 
             <div className="student-form-field-container">
-              <label>Taxas:</label>
+              <label>{contrato.termoTaxas}:</label>
               <CurrencyInput
                 disabled
                 decimalsLimit={2}
