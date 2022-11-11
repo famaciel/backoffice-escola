@@ -243,6 +243,14 @@ const FormularContrato = () => {
       <div className="submit-loading-container">
         <h1>Contrato cadastrado com sucesso!</h1>
         <FontAwesomeIcon icon={faCheck} color="#2684ff" size="5x" />
+        <div className="student-form-row">
+          <div className="student-form-field-container">
+            <button className="print-button" 
+              onClick={(e) => openPreviewContratoImpressao(e)}>
+              Imprimir
+            </button>
+          </div>
+        </div>
       </div>
     );
   }

@@ -107,9 +107,9 @@ const ListaAlunos = () => {
     window.open(`/contrato/${student.id}`, "_blank");
   };
 
-  const openMatriculaImpressao = (e, student) => {
+  const openContratoImpressao = (e, student) => {
     e.stopPropagation(0);
-    window.open(`/matricularimpressao/${student.id}`, "_blank");
+    window.open(`/preview-contrato/${student.id}`, "_blank");
   };
 
   const openPreviewMatriculaImpressao = (e, student) => {
@@ -241,6 +241,24 @@ const ListaAlunos = () => {
                     <Tooltip
                       enterDelay={100}
                       leaveDelay={0}
+                      title="Imprimir matricula"
+                    >
+                      <button
+                        onClick={(e) => openPreviewMatriculaImpressao(e, st)}
+                        className="round-clickable-icon"
+                        disabled={!st.foiMatriculado}
+                      >
+                        <FontAwesomeIcon
+                          size="lg"
+                          color="#2684ff"
+                          icon={faDownload}
+                        />
+                      </button>
+                    </Tooltip>
+
+                    <Tooltip
+                      enterDelay={100}
+                      leaveDelay={0}
                       title="Enviar mensagem responsável #1"
                     >
                       <button
@@ -276,23 +294,7 @@ const ListaAlunos = () => {
                       </button>
                     </Tooltip>
 
-                    <Tooltip
-                      enterDelay={100}
-                      leaveDelay={0}
-                      title="Imprimir matrícula"
-                    >
-                      <button
-                        onClick={(e) => openMatriculaImpressao(e, st)}
-                        className="round-clickable-icon"
-                        disabled={!st.foiMatriculado}
-                      >
-                        <FontAwesomeIcon
-                          size="lg"
-                          color="#2684ff"
-                          icon={faPrint}
-                        />
-                      </button>
-                    </Tooltip>
+                    
 
                     <Tooltip
                       enterDelay={100}
@@ -315,20 +317,22 @@ const ListaAlunos = () => {
                     <Tooltip
                       enterDelay={100}
                       leaveDelay={0}
-                      title="Imprimir matricula"
+                      title="Imprimir contrato"
                     >
                       <button
-                        onClick={(e) => openPreviewMatriculaImpressao(e, st)}
+                        onClick={(e) => openContratoImpressao(e, st)}
                         className="round-clickable-icon"
                         disabled={!st.foiMatriculado}
                       >
                         <FontAwesomeIcon
                           size="lg"
                           color="#2684ff"
-                          icon={faDownload}
+                          icon={faPrint}
                         />
                       </button>
                     </Tooltip>
+
+                    
                   </div>
                 </div>
               </li>
