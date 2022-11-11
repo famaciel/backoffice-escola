@@ -102,7 +102,7 @@ const ContratoPreview = () => {
           <div className="matricula-form-header">
             <img src={logo} alt="logo" />
             <h2>Escola dos Sonhos</h2>
-            <h3>Contrato de Prestação de Serviços - 2023</h3>
+            <h3>Contrato de Prestação de Serviços Educacionais - 2023</h3>
           </div>
 
           {!isPrinting && (
@@ -177,6 +177,8 @@ const ContratoPreview = () => {
         <FormularioIntegral matricula={contrato} isContrato readonly />
       </div>
 
+      <div>
+        <div className="matricula-form-fields">
       <h4>Descontos</h4>
       <div className="student-form-row">
         <div className="student-form-field-container">
@@ -270,6 +272,7 @@ const ContratoPreview = () => {
           />
         </div>
       </div>
+      </div></div>
 
 
 
