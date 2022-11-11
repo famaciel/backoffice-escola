@@ -142,6 +142,107 @@ const ContratoPreview = () => {
         <FormularioIntegral matricula={contrato} isContrato readonly />
       </div>
 
+      <h4>Descontos</h4>
+      <div className="student-form-row">
+        <div className="student-form-field-container">
+          <label>Valor:</label>
+          <input
+            name="valor"
+            type="number"
+            onChange={onChangeDesconto}
+            value={contrato.desconto.valor}
+          />
+        </div>
+
+        <div className="student-form-field-container">
+          <label>Porcentagem:</label>
+          <input
+            type="number"
+            name="porcentagem"
+            onChange={onChangeDesconto}
+            value={contrato.desconto.porcentagem}
+          />
+        </div>
+      </div>
+
+      <h4>Cálculo</h4>
+      <div className="student-form-row">
+        <div className="student-form-field-container">
+          <label>Parcelas:</label>
+          <ReactSelect
+            options={parcelaOptions}
+            name="parcelamento"
+            value={parcelaOptions.find(
+              (a) => a.value === contrato.parcelamento
+            )}
+            onChange={onChangeParcela}
+          />
+        </div>
+      </div>
+
+      <div className="student-form-row">
+        <div className="student-form-field-container">
+          <label>Anuidade - Final:</label>
+          <CurrencyInput
+            disabled
+            decimalsLimit={2}
+            decimalScale={2}
+            prefix="R$ "
+            value={contrato.valorAnuidadeFinal}
+          />
+        </div>
+        <div className="student-form-field-container">
+          <label>Parcela Anuidade:</label>
+          <CurrencyInput
+            disabled
+            decimalsLimit={2}
+            decimalScale={2}
+            prefix="R$ "
+            value={contrato.parcelaAnuidade}
+          />
+        </div>
+      </div>
+
+      <div className="student-form-row">
+        <div className="student-form-field-container">
+          <label>Parcelas Taxas:</label>
+          <ReactSelect
+            options={parcelaTaxasOptions}
+            name="parcelamentoTaxas"
+            value={parcelaTaxasOptions.find(
+              (a) => a.value === contrato.parcelamentoTaxas
+            )}
+            onChange={onChangeParcelaTaxas}
+          />
+        </div>
+      </div>
+
+      <div className="student-form-row">
+        <div className="student-form-field-container">
+          <label>Parcela Taxas:</label>
+          <CurrencyInput
+            disabled
+            decimalsLimit={2}
+            decimalScale={2}
+            prefix="R$ "
+            value={contrato.parcelaTaxas}
+          />
+        </div>
+      </div>
+
+      <div className="student-form-row">
+        <div className="student-form-field-container">
+          <label>Observações adicionais:</label>
+          <textarea
+            name="observacoes"
+            onChange={onChange}
+            value={contrato.observacoes}
+          />
+        </div>
+      </div>
+
+
+
           <div
             style={{
               textAlign: "center",
