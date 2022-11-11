@@ -12,11 +12,16 @@ import ReactLoading from "react-loading";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import CurrencyInput from "react-currency-input-field";
 
 const ContratoPreview = () => {
   const { studentId } = useParams();
 
   const [contrato, setContrato] = useState(null);
+
+  const [initialLoading, setInitialLoading] = useState(false);
+
+  const [isPrinting, setIsPrinting] = useState(false);
 
   const loadContrato = useCallback(async () => {
     try {
