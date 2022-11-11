@@ -10,7 +10,7 @@ import Home from "./Pages/Home/Home";
 import FormularContrato from "./Pages/Contrato/FormularContrato/FormularContrato";
 import FormularioMatriculaImpressao from "./Pages/Matricula/FormularioMatriculaImpressao/FormularioMatriculaImpressao";
 import MatriculaPreview from "./Pages/Matricula/Preview/MatriculaPreview";
-import ContratoPreview from "./Pages/Contrato/ContratoPreview/ContratoPreview";
+import ContratoPreview from "./Pages/Contrato/Preview/ContratoPreview";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
