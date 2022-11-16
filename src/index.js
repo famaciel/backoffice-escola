@@ -8,7 +8,6 @@ import Menu from "./Components/Menu/Menu";
 import FormularioMatricula from "./Pages/Matricula/FormularioMatricula/FormularioMatricula";
 import Home from "./Pages/Home/Home";
 import FormularContrato from "./Pages/Contrato/FormularContrato/FormularContrato";
-import FormularioMatriculaImpressao from "./Pages/Matricula/FormularioMatriculaImpressao/FormularioMatriculaImpressao";
 import MatriculaPreview from "./Pages/Matricula/Preview/MatriculaPreview";
 import ContratoPreview from "./Pages/Contrato/Preview/ContratoPreview";
 import ContratoImpressao from "./Pages/Contrato/ContratoImpressao/ContratoImpressao";
@@ -36,10 +35,6 @@ const router = createBrowserRouter([
   {
     path: "/preview-contrato/:studentId",
     element: <ContratoPreview />,
-  },
-  {
-    path: "/matricularimpressao/:studentId",
-    element: <FormularioMatriculaImpressao />,
   },
   {
     path: "/preview-matricula/:studentId",
