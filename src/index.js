@@ -11,7 +11,7 @@ import FormularContrato from "./Pages/Contrato/FormularContrato/FormularContrato
 import FormularioMatriculaImpressao from "./Pages/Matricula/FormularioMatriculaImpressao/FormularioMatriculaImpressao";
 import MatriculaPreview from "./Pages/Matricula/Preview/MatriculaPreview";
 import ContratoPreview from "./Pages/Contrato/Preview/ContratoPreview";
-import ContratoInfantilConvencional from "./Pages/Contrato/Docs/INFANTIL/CONVENCIONAL/ContratoInfantilConvencional";
+import ContratoImpressao from "./Pages/Contrato/ContratoImpressao/ContratoImpressao";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -46,8 +46,8 @@ const router = createBrowserRouter([
     element: <MatriculaPreview />,
   },
   {
-    path: "/contrato/infantil/convencional/:studentId",
-    element: <ContratoInfantilConvencional />,
+    path: "/contratoimpressao/:studentId",
+    element: <ContratoImpressao />,
   }
 ]);
 

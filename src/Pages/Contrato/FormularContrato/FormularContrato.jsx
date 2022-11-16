@@ -200,7 +200,7 @@ const FormularContrato = () => {
 
   const openContratoImpressao = (e) => {
     e.stopPropagation(0);
-    window.open(`/contrato/infantil/convencional/${studentId}`, "_blank");
+    window.open(`/contratoimpressao/${studentId}`, "_blank");
   };
 
   useEffect(() => {

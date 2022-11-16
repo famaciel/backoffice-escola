@@ -1,0 +1,26 @@
+.contrato-impressao {
+  
+  margin: 30px;
+  font-family: 'Bookman Old Style';
+
+  .contrato-table{
+    width: 100%;
+    font-family: 'Courier New', Courier, monospace;
+    p {
+      text-align: center;
+    }
+  }
+
+  .contrato-table-dados {
+    width: 100%;
+    table, th, td {
+      border:1px solid black;
+    }
+  }
+
+  .contrato-td-logo{
+    width: 20%;
+  }
+
+
+}
