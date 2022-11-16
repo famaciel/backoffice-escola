@@ -98,8 +98,8 @@ const ContratoPreview = () => {
   return (
     <>
       <div ref={ref}>
-        <div className="matricula-form preview">
-          <div className="matricula-form-header">
+        <div className="contrato-form preview">
+          <div className="contrato-form-header">
             <img src={logo} alt="logo" />
             <h2>Escola dos Sonhos</h2>
             <h3>Contrato de Prestação de Serviços Educacionais - 2023</h3>
@@ -129,7 +129,7 @@ const ContratoPreview = () => {
           )}
 
       <div>
-        <div className="matricula-form-fields">
+        <div className="contrato-form-fields">
           <div className="student-form-row">
             <div className="student-form-field-container">
               <label>Nome:</label>
@@ -178,7 +178,7 @@ const ContratoPreview = () => {
       </div>
 
       <div>
-        <div className="matricula-form-fields">
+        <div className="contrato-form-fields">
       <h4>Descontos</h4>
       <div className="student-form-row">
         <div className="student-form-field-container">

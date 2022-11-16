@@ -11,6 +11,7 @@ import FormularContrato from "./Pages/Contrato/FormularContrato/FormularContrato
 import FormularioMatriculaImpressao from "./Pages/Matricula/FormularioMatriculaImpressao/FormularioMatriculaImpressao";
 import MatriculaPreview from "./Pages/Matricula/Preview/MatriculaPreview";
 import ContratoPreview from "./Pages/Contrato/Preview/ContratoPreview";
+import ContratoInfantilConvencional from "./Pages/Contrato/Docs/INFANTIL/CONVENCIONAL/ContratoInfantilConvencional";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
   {
     path: "/preview-matricula/:studentId",
     element: <MatriculaPreview />,
+  },
+  {
+    path: "/contrato/infantil/convencional/:studentId",
+    element: <ContratoInfantilConvencional />,
   }
 ]);
 
