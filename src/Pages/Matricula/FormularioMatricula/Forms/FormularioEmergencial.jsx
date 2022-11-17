@@ -4,6 +4,7 @@ import ReactInputMask from "react-input-mask";
 const FormularioEmergencial = ({
   matricula: { autorizacoes },
   onChangeValue,
+  readonly,
 }) => {
   const onChange = useCallback(
     ({ target: { name, value } }) => {
@@ -45,80 +46,90 @@ const FormularioEmergencial = ({
           <label>Nome</label>
           <label>Telefone</label>
         </div>
-        <div className="double-input-container">
+        {!(readonly && !autorizacoes.pessoas[0].nome) && (
+          <div className="double-input-container">
+            <input
+              name="nome"
+              onChange={(e) => onChangePermissaoPessoa(e, 0)}
+              value={autorizacoes.pessoas[0]?.nome}
+            />
+            <ReactInputMask
+              mask="(99) 99999-9999"
+              name="contato"
+              placeholder="( ) _____-____"
+              onChange={(e) => onChangePermissaoPessoa(e, 0)}
+              value={autorizacoes.pessoas[0]?.contato}
+            />
+          </div>
+        )}
+        {!(readonly && !autorizacoes.pessoas[1].nome) && (
+          <div className="double-input-container">
+            <input
+              name="nome"
+              onChange={(e) => onChangePermissaoPessoa(e, 1)}
+              value={autorizacoes.pessoas[1]?.nome}
+            />
+            <ReactInputMask
+              mask="(99) 99999-9999"
+              name="contato"
+              placeholder="( ) _____-____"
+              onChange={(e) => onChangePermissaoPessoa(e, 1)}
+              value={autorizacoes.pessoas[1]?.contato}
+            />
+          </div>
+        )}
+        {!(readonly && !autorizacoes.pessoas[2].nome) && (
+          <div className="double-input-container">
+            <input
+              name="nome"
+              onChange={(e) => onChangePermissaoPessoa(e, 2)}
+              value={autorizacoes.pessoas[2]?.nome}
+            />
+            <ReactInputMask
+              mask="(99) 99999-9999"
+              name="contato"
+              placeholder="( ) _____-____"
+              onChange={(e) => onChangePermissaoPessoa(e, 2)}
+              value={autorizacoes.pessoas[2]?.contato}
+            />
+          </div>
+        )}
+      </div>
+      <div className="student-form-row">
+        <div className="student-form-field-container">
+          <label>Tipo Sanguíneo:</label>
           <input
-            name="nome"
-            onChange={(e) => onChangePermissaoPessoa(e, 0)}
-            value={autorizacoes.pessoas[0]?.nome}
-          />
-          <ReactInputMask
-            mask="(99) 99999-9999"
-            name="contato"
-            placeholder="( ) _____-____"
-            onChange={(e) => onChangePermissaoPessoa(e, 0)}
-            value={autorizacoes.pessoas[0]?.contato}
+            name="tipoSanguineo"
+            onChange={onChange}
+            value={autorizacoes.tipoSanguineo}
           />
         </div>
-        <div className="double-input-container">
+        <div className="student-form-field-container">
+          <label>Alergias:</label>
           <input
-            name="nome"
-            onChange={(e) => onChangePermissaoPessoa(e, 1)}
-            value={autorizacoes.pessoas[1]?.nome}
-          />
-          <ReactInputMask
-            mask="(99) 99999-9999"
-            name="contato"
-            placeholder="( ) _____-____"
-            onChange={(e) => onChangePermissaoPessoa(e, 1)}
-            value={autorizacoes.pessoas[1]?.contato}
-          />
-        </div>
-        <div className="double-input-container">
-          <input
-            name="nome"
-            onChange={(e) => onChangePermissaoPessoa(e, 2)}
-            value={autorizacoes.pessoas[2]?.nome}
-          />
-          <ReactInputMask
-            mask="(99) 99999-9999"
-            name="contato"
-            placeholder="( ) _____-____"
-            onChange={(e) => onChangePermissaoPessoa(e, 2)}
-            value={autorizacoes.pessoas[2]?.contato}
+            name="alergias"
+            onChange={onChange}
+            value={autorizacoes.alergias}
           />
         </div>
       </div>
-      <div className="student-form-field-container">
-        <label>Tipo Sanguíneo:</label>
-        <input
-          name="tipoSanguineo"
-          onChange={onChange}
-          value={autorizacoes.tipoSanguineo}
-        />
-      </div>
-      <div className="student-form-field-container">
-        <label>Alergias:</label>
-        <input
-          name="alergias"
-          onChange={onChange}
-          value={autorizacoes.alergias}
-        />
-      </div>
-      <div className="student-form-field-container">
-        <label>Restrição medica/alimentar:</label>
-        <input
-          name="restricaoAlimentar"
-          onChange={onChange}
-          value={autorizacoes.restricaoAlimentar}
-        />
-      </div>
-      <div className="student-form-field-container">
-        <label>Medicamentos de uso contínuo:</label>
-        <input
-          name="medicamentosUsoContinuo"
-          onChange={onChange}
-          value={autorizacoes.medicamentosUsoContinuo}
-        />
+      <div className="student-form-row">
+        <div className="student-form-field-container">
+          <label>Restrição medica/alimentar:</label>
+          <input
+            name="restricaoAlimentar"
+            onChange={onChange}
+            value={autorizacoes.restricaoAlimentar}
+          />
+        </div>
+        <div className="student-form-field-container">
+          <label>Medicamentos de uso contínuo:</label>
+          <input
+            name="medicamentosUsoContinuo"
+            onChange={onChange}
+            value={autorizacoes.medicamentosUsoContinuo}
+          />
+        </div>
       </div>
       <div className="student-form-field-container">
         <label>Observações adicionais:</label>

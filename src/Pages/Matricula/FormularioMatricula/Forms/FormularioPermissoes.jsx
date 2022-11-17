@@ -1,6 +1,10 @@
 import { useCallback } from "react";
 
-const FormularioPermissoes = ({ matricula: { seguranca }, onChangeValue }) => {
+const FormularioPermissoes = ({
+  matricula: { seguranca },
+  onChangeValue,
+  readonly,
+}) => {
   const onChange = useCallback(
     ({ target: { name, value } }) => {
       onChangeValue({
@@ -30,7 +34,7 @@ const FormularioPermissoes = ({ matricula: { seguranca }, onChangeValue }) => {
     },
     [onChangeValue, seguranca]
   );
-
+  console.log(seguranca.pessoas);
   return (
     <div className="matricula-form-fields">
       <h4>Segurança</h4>
@@ -44,42 +48,49 @@ const FormularioPermissoes = ({ matricula: { seguranca }, onChangeValue }) => {
           <label>Nome</label>
           <label>Parentesco</label>
         </div>
-        <div className="double-input-container">
-          <input
-            name="nome"
-            onChange={(e) => onChangePermissaoPessoa(e, 0)}
-            value={seguranca.pessoas[0]?.nome}
-          />
-          <input
-            name="parentesco"
-            onChange={(e) => onChangePermissaoPessoa(e, 0)}
-            value={seguranca.pessoas[0]?.parentesco}
-          />
-        </div>
-        <div className="double-input-container">
-          <input
-            name="nome"
-            onChange={(e) => onChangePermissaoPessoa(e, 1)}
-            value={seguranca.pessoas[1]?.nome}
-          />
-          <input
-            name="parentesco"
-            onChange={(e) => onChangePermissaoPessoa(e, 1)}
-            value={seguranca.pessoas[1]?.parentesco}
-          />
-        </div>
-        <div className="double-input-container">
-          <input
-            name="nome"
-            onChange={(e) => onChangePermissaoPessoa(e, 2)}
-            value={seguranca.pessoas[2]?.nome}
-          />
-          <input
-            name="parentesco"
-            onChange={(e) => onChangePermissaoPessoa(e, 2)}
-            value={seguranca.pessoas[2]?.parentesco}
-          />
-        </div>
+
+        {!(readonly && !seguranca.pessoas[0].nome) && (
+          <div className="double-input-container">
+            <input
+              name="nome"
+              onChange={(e) => onChangePermissaoPessoa(e, 0)}
+              value={seguranca.pessoas[0]?.nome}
+            />
+            <input
+              name="parentesco"
+              onChange={(e) => onChangePermissaoPessoa(e, 0)}
+              value={seguranca.pessoas[0]?.parentesco}
+            />
+          </div>
+        )}
+        {!(readonly && !seguranca.pessoas[1].nome) && (
+          <div className="double-input-container">
+            <input
+              name="nome"
+              onChange={(e) => onChangePermissaoPessoa(e, 1)}
+              value={seguranca.pessoas[1]?.nome}
+            />
+            <input
+              name="parentesco"
+              onChange={(e) => onChangePermissaoPessoa(e, 1)}
+              value={seguranca.pessoas[1]?.parentesco}
+            />
+          </div>
+        )}
+        {!(readonly && !seguranca.pessoas[2].nome) && (
+          <div className="double-input-container">
+            <input
+              name="nome"
+              onChange={(e) => onChangePermissaoPessoa(e, 2)}
+              value={seguranca.pessoas[2]?.nome}
+            />
+            <input
+              name="parentesco"
+              onChange={(e) => onChangePermissaoPessoa(e, 2)}
+              value={seguranca.pessoas[2]?.parentesco}
+            />
+          </div>
+        )}
       </div>
 
       <div className="student-form-field-container">

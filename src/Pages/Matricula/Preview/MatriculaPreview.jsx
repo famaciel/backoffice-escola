@@ -84,8 +84,10 @@ const MatriculaPreview = () => {
         <div className="matricula-form preview">
           <div className="matricula-form-header">
             <img src={logo} alt="logo" />
-            <h2>Escola dos Sonhos</h2>
-            <h3>Ficha de matrícula 2023</h3>
+            <div>
+              <h2>Escola dos Sonhos</h2>
+              <h3>Ficha de matrícula 2023</h3>
+            </div>
           </div>
 
           {!isPrinting && (
@@ -137,11 +139,13 @@ const MatriculaPreview = () => {
           <FormularioEmergencial
             matricula={matricula}
             onChangeValue={() => {}}
+            readonly
           />
 
           <FormularioPermissoes
             matricula={matricula}
             onChangeValue={() => {}}
+            readonly
           />
 
           <FormularioIntegral matricula={matricula} onChangeValue={() => {}} />
@@ -149,7 +153,7 @@ const MatriculaPreview = () => {
           <div
             style={{
               textAlign: "center",
-              marginTop: 40,
+              marginTop: 200,
               paddingBottom: 40,
               width: "80%",
               display: "flex",

@@ -2,9 +2,44 @@
   &.preview {
     overflow: unset !important;
 
+    .student-form-field-container {
+      // margin: 5px 15px;
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .matricula-form-fields {
+      h4 {
+        margin: 15px 0;
+      }
+    }
+
+    .double-input-labels {
+      margin-top: 15px;
+    }
+
+    textarea {
+      height: fit-content;
+    }
+
     .matricula-form-header {
       font-size: 1.4em;
       margin-bottom: 30px;
+      display: flex;
+
+      img {
+        position: absolute;
+        left: 15px;
+      }
+
+      h2 {
+        margin: 0;
+      }
+
+      h3 {
+        margin: 0;
+        margin-top: 10px;
+      }
     }
 
     input,
