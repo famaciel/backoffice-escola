@@ -128,6 +128,26 @@ const FormularioStudent = ({
 
       <div className="student-form-row">
         <div className="student-form-field-container">
+          <label>RG:</label>
+          <ReactInputMask
+            onChange={onChangeDadosGerais}
+            name="rg"
+            value={dadosGerais.rg}
+          />
+        </div>
+
+        <div className="student-form-field-container">
+          <label>CPF:</label>
+          <ReactInputMask
+            onChange={onChangeDadosGerais}
+            name="cpf"
+            value={dadosGerais.cpf}
+          />
+        </div>
+      </div>
+
+      <div className="student-form-row">
+        <div className="student-form-field-container">
           <label>* Natural de:</label>
           <input
             name="naturalDe"

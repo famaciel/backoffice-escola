@@ -41,6 +41,8 @@ const formEmptyFields = {
     estado: "",
     dataNascimento: "",
     sexo: "",
+    rg: "",
+    cpf: "",
     endereco: {
       contatoResidencial: "",
       numero: "",
@@ -133,7 +135,7 @@ const FormularioMatricula = () => {
       const stepFields = {
         0: {
           fields: [matricula.dadosGerais, matricula.dadosGerais.endereco],
-          optionalFields: ["contatoResidencial", "contatoRecado"],
+          optionalFields: ["rg", "cpf", "contatoResidencial", "contatoRecado"],
         },
         2: {
           fields: [matricula.respFinanceiro],
