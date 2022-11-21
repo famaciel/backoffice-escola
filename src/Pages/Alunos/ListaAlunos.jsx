@@ -112,6 +112,11 @@ const ListaAlunos = () => {
     window.open(`/preview-contrato/${student.id}`, "_blank");
   };
 
+  const openContratoFullImpressao = (e, student) => {
+    e.stopPropagation(0);
+    window.open(`/contratoimpressao/${student.id}`, "_blank");
+  };
+
   const openPreviewMatriculaImpressao = (e, student) => {
     e.stopPropagation(0);
     window.open(`/preview-matricula/${student.id}`, "_blank");
@@ -328,6 +333,24 @@ const ListaAlunos = () => {
                           size="lg"
                           color="#2684ff"
                           icon={faPrint}
+                        />
+                      </button>
+                    </Tooltip>
+
+                    <Tooltip
+                      enterDelay={100}
+                      leaveDelay={0}
+                      title="Imprimir Contrato Completo"
+                    >
+                      <button
+                        onClick={(e) => openContratoFullImpressao(e, st)}
+                        className="round-clickable-icon"
+                        disabled={!st.foiMatriculado}
+                      >
+                        <FontAwesomeIcon
+                          size="lg"
+                          color="#2684ff"
+                          icon={faDownload}
                         />
                       </button>
                     </Tooltip>

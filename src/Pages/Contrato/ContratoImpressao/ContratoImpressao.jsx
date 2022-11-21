@@ -8,12 +8,25 @@ import ReactLoading from "react-loading";
 import { useEffect } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faDownload } from "@fortawesome/free-solid-svg-icons";
+import InfantilFidelidade from './Forms/Infantil/Fidelidade/InfantilFidelidade'
+import InfantilConvencional from './Forms/Infantil/Convencional/InfantilConvencional'
+import TransicaoFidelidade from './Forms/Transicao/Fidelidade/TransicaoFidelidade'
+import TransicaoConvencional from './Forms/Transicao/Convencional/TransicaoConvencional'
+import DesenvolvimentoFidelidade from './Forms/Desenvolvimento/Fidelidade/DesenvolvimentoFidelidade'
+import DesenvolvimentoConvencional from './Forms/Desenvolvimento/Convencional/DesenvolvimentoConvencional'
+import AprofundamentoFidelidade from './Forms/Aprofundamento/Fidelidade/AprofundamentoFidelidade'
+import AprofundamentoFidelidade6Ano from './Forms/Aprofundamento/Fidelidade/AprofundamentoFidelidade6Ano'
+import AprofundamentoConvencional from './Forms/Aprofundamento/Convencional/AprofundamentoConvencional'
+import ExpansaoFidelidade from './Forms/Expansao/Fidelidade/ExpansaoFidelidade'
+import ExpansaoConvencional from './Forms/Expansao/Convencional/ExpansaoConvencional'
 
 import logo from "../../../Utils/logo2.jpg";
 
 const ContratoImpressao = () => {
 
   const { studentId } = useParams();
+
+  const [step, setStep] = useState(0);
 
   const [contrato, setContrato] = useState(null);
 
@@ -32,6 +45,9 @@ const ContratoImpressao = () => {
       ]);
 
       setContrato(contrato);
+
+      setStep(contrato.tipoContrato);
+
     } catch (err) {
       console.error("ERROR: ", err);
     } finally {
@@ -57,32 +73,32 @@ const ContratoImpressao = () => {
   }
 
   const ref = React.createRef();
-  
+
   return (
     <div ref={ref} className="contrato-impressao">
 
       {!isPrinting && (
-            <button
-              style={{
-                position: "absolute",
-                right: "15px",
-                top: "15px",
-                padding: 10,
-                borderRadius: 4,
-                cursor: "pointer",
-              }}
-              onClick={() => {
-                setIsPrinting(true);
+        <button
+          style={{
+            position: "absolute",
+            right: "15px",
+            top: "15px",
+            padding: 10,
+            borderRadius: 4,
+            cursor: "pointer",
+          }}
+          onClick={() => {
+            setIsPrinting(true);
 
-                setTimeout(() => {
-                  window.print();
-                }, 300);
-              }}
-            >
-              BAIXAR / IMPRIMIR{" "}
-              <FontAwesomeIcon icon={faDownload} style={{ marginLeft: 15 }} />
-            </button>
-          )}
+            setTimeout(() => {
+              window.print();
+            }, 300);
+          }}
+        >
+          BAIXAR / IMPRIMIR{" "}
+          <FontAwesomeIcon icon={faDownload} style={{ marginLeft: 15 }} />
+        </button>
+      )}
 
       <table className="contrato-table">
         <tr>
@@ -92,14 +108,14 @@ const ContratoImpressao = () => {
               <tr>
                 <td>
                   <p>
-                  <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b><br></br>
-                  <b>ESCOLA DOS SONHOS</b><br></br>
-                  <b>{contrato.tituloContrato}</b>
+                    <b>CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS</b><br></br>
+                    <b>ESCOLA DOS SONHOS</b><br></br>
+                    <b>{contrato.tituloContrato}</b>
                   </p>
                 </td>
               </tr>
             </table>
-          </td>  
+          </td>
         </tr>
       </table>
 
@@ -134,37 +150,107 @@ const ContratoImpressao = () => {
         <tr>
           <td colspan="2">Turma:</td>
         </tr>
-        
+
       </table>
 
       <p>
-      Por meio do presente instrumento particular de um lado o CONTRATANTE, na qualidade de representante legal do educando, qualificado na ficha de matrícula e no quadro acima, que passa a fazer parte do presente contrato, e de outro lado, como CONTRATADA: Aruana Projetos Educacionais 
-      Ltda ME, pessoa jurídica de direito privado, com sede à Rua Cristóvão Machado de Campos, 1380, Vargem Grande Florianópolis, CNPJ nº 21.962.608/0001-77 e inscrição estadual isenta, Mantenedora da <b><u>ESCOLA DOS SONHOS</u></b> firmam o presente CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS para o ano letivo de 2023.
+        Por meio do presente instrumento particular de um lado o CONTRATANTE, na qualidade de representante legal do educando, qualificado na ficha de matrícula e no quadro acima, que passa a fazer parte do presente contrato, e de outro lado, como CONTRATADA: Aruana Projetos Educacionais
+        Ltda ME, pessoa jurídica de direito privado, com sede à Rua Cristóvão Machado de Campos, 1380, Vargem Grande Florianópolis, CNPJ nº 21.962.608/0001-77 e inscrição estadual isenta, Mantenedora da <b><u>ESCOLA DOS SONHOS</u></b> firmam o presente CONTRATO DE PRESTAÇÃO DE SERVIÇOS EDUCACIONAIS para o ano letivo de 2023.
       </p>
 
       <p>Considerando:</p>
 
       <ul >
-        <li>A liberdade do ensino pela iniciativa privada e o pluralismo pedagógico, princípios expressos 
-      nos artigos 205, 206 e 209 da Constituição Federal;</li>
-        <li>A consciente opção do CONTRATANTE pelo ensino particular, expressa na Lei n. 9.870/99 e 
-      na Lei Complementar de Santa Catarina n. 170/98;</li>
-        <li>O artigo 1.566 do Código Civil Brasileiro e 55 e 56 do Estatuto da Criança e Adolescente que 
-      atribuem aos pais ou responsáveis a obrigação de matrícula escolar e supervisão do 
-      rendimento dos educandos;</li>
-        <li>O artigo 15 e seguintes do Estatuto da Criança e Adolescente que asseguram aos educandos 
-      o direito de liberdade e dignidade, inclusive atribuem aos pais à obrigação de respeito aos 
-      objetos pessoais, especialmente no que se refere ao material escolar de uso individual que são 
-      essenciais para atender às necessidades de aprendizagem do educando;
-      </li>
-        <li>Que o educando/aluno, beneficiário exclusivo da prestação de serviço educacional, que deverá 
-      observar os princípios de comportamento e conduta éticos, morais e disciplinares, respeitar as 
-      normas de boa convivência coletiva junto aos demais integrantes da comunidade escolar, 
-      condutas necessárias e compatíveis com o desenvolvimento da educação e do ensino, resolvem:</li>
-      </ul> 
-      
+        <li>A liberdade do ensino pela iniciativa privada e o pluralismo pedagógico, princípios expressos
+          nos artigos 205, 206 e 209 da Constituição Federal;</li>
+        <li>A consciente opção do CONTRATANTE pelo ensino particular, expressa na Lei n. 9.870/99 e
+          na Lei Complementar de Santa Catarina n. 170/98;</li>
+        <li>O artigo 1.566 do Código Civil Brasileiro e 55 e 56 do Estatuto da Criança e Adolescente que
+          atribuem aos pais ou responsáveis a obrigação de matrícula escolar e supervisão do
+          rendimento dos educandos;</li>
+        <li>O artigo 15 e seguintes do Estatuto da Criança e Adolescente que asseguram aos educandos
+          o direito de liberdade e dignidade, inclusive atribuem aos pais à obrigação de respeito aos
+          objetos pessoais, especialmente no que se refere ao material escolar de uso individual que são
+          essenciais para atender às necessidades de aprendizagem do educando;
+        </li>
+        <li>Que o educando/aluno, beneficiário exclusivo da prestação de serviço educacional, que deverá
+          observar os princípios de comportamento e conduta éticos, morais e disciplinares, respeitar as
+          normas de boa convivência coletiva junto aos demais integrantes da comunidade escolar,
+          condutas necessárias e compatíveis com o desenvolvimento da educação e do ensino, resolvem:</li>
+      </ul>
 
+      {step === 0 && (
+        <p>Zero</p>
+      )}
 
+      {step === 1 && (
+        <InfantilFidelidade />
+      )}
+
+      {step === 2 && (
+        <InfantilConvencional />
+      )}
+
+      {step === 3 && (
+        <TransicaoFidelidade />
+      )}
+
+      {step === 4 && (
+        <TransicaoConvencional />
+      )}
+
+      {step === 5 && (
+        <DesenvolvimentoFidelidade />
+      )}
+
+      {step === 6 && (
+        <DesenvolvimentoConvencional />
+      )}
+
+      {step === 7 && (
+        <AprofundamentoFidelidade />
+      )}
+
+      {step === 8 && (
+        <AprofundamentoFidelidade6Ano />
+      )}
+
+      {step === 9 && (
+        <AprofundamentoConvencional />
+      )}
+
+      {step === 10 && (
+        <ExpansaoFidelidade />
+      )}
+
+      {step === 11 && (
+        <ExpansaoConvencional />
+      )}
+
+      <table className="contrato-table-dados-valores">
+        <tr>
+          <td>&nbsp;<br />Assinatura do responsável financeiro/CONTRATANTE</td>
+          <td>&nbsp;<br />CPF</td>
+        </tr>
+        <tr>
+          <td>&nbsp;<br />Assinatura do representante legal</td>
+          <td>&nbsp;<br />CPF</td>
+        </tr>
+        <tr>
+          <td>&nbsp;<br />Assinatura do conjugê</td>
+          <td>&nbsp;<br />CPF</td>
+        </tr>
+        <tr>
+          <td>&nbsp;<br />Assinatura testemunha</td>
+          <td>&nbsp;<br />CPF</td>
+        </tr>
+        <tr>
+          <td>&nbsp;<br />Assinatura contratado</td>
+          <td>&nbsp;<br />CPF</td>
+        </tr>
+      </table>
+
+      <p>Florianópolis, ______ de ________________ de 20___. </p>
 
     </div>
   );

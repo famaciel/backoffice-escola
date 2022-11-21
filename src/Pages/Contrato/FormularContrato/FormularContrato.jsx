@@ -198,11 +198,6 @@ const FormularContrato = () => {
     window.open(`/preview-contrato/${studentId}`, "_blank");
   };
 
-  const openContratoImpressao = (e) => {
-    e.stopPropagation(0);
-    window.open(`/contratoimpressao/${studentId}`, "_blank");
-  };
-
   useEffect(() => {
     loadContrato();
   }, [loadContrato]);
@@ -417,11 +412,6 @@ const FormularContrato = () => {
       </div>
 
       <div className="contrato-footer">
-      <button className="print-button" 
-          disabled={!contrato.temContrato}
-          onClick={(e) => openContratoImpressao(e)}>
-          Imprimir Contrato Extra
-        </button>&emsp;&emsp;
         <button className="print-button" 
           disabled={!contrato.temContrato}
           onClick={(e) => openPreviewContratoImpressao(e)}>

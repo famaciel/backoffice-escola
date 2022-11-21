@@ -103,6 +103,7 @@ const ContratoPreview = () => {
             <img src={logo} alt="logo" />
             <h2>Escola dos Sonhos</h2>
             <h3>Contrato de Prestação de Serviços Educacionais - 2023</h3>
+            <h3>Anexo 1</h3>
           </div>
 
           {!isPrinting && (
