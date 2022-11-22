@@ -148,7 +148,9 @@ const MatriculaPreview = () => {
             readonly
           />
 
-          <FormularioIntegral matricula={matricula} onChangeValue={() => {}} />
+          {matricula.cabecalho.temIntegral && (
+            <FormularioIntegral matricula={matricula} onChangeValue={() => {}} />
+          )}
 
           <div
             style={{
