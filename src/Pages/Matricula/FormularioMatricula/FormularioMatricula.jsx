@@ -330,21 +330,21 @@ const FormularioMatricula = () => {
           )}
 
           {step === 1 && (
-            <div className="matricula-form-fields">
-              <FormularioParent
-                parentName="Mãe"
-                parent="mae"
-                dadosParent={matricula.mae}
-                onChangeValue={onChangeValue}
-              />
+            <FormularioParent
+              parentName="Mãe"
+              parent="mae"
+              dadosParent={matricula.mae}
+              onChangeValue={onChangeValue}
+            />
+          )}
 
-              <FormularioParent
-                parentName="Pai"
-                parent="pai"
-                dadosParent={matricula.pai}
-                onChangeValue={onChangeValue}
-              />
-            </div>
+          {step === 1 && (
+            <FormularioParent
+              parentName="Pai"
+              parent="pai"
+              dadosParent={matricula.pai}
+              onChangeValue={onChangeValue}
+            />
           )}
 
           {step === 2 && (

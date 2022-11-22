@@ -137,7 +137,9 @@ const FormularioParent = ({
                 disabled={readonly}
               />
             </div>
+          </div>
 
+          <div className="student-form-row">
             <div className="student-form-field-container">
               <label>{isRequired && "* "}E-mail:</label>
               <input
