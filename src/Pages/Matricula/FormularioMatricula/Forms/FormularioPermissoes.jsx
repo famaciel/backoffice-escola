@@ -1,10 +1,11 @@
 import { useCallback } from "react";
 
 const FormularioPermissoes = ({
-  matricula: { seguranca },
+  matricula: { seguranca, cabecalho },
   onChangeValue,
   readonly,
 }) => {
+  console.log('temAutorizaoSaidaSozinho : ' + cabecalho.temAutorizaoSaidaSozinho);
   const onChange = useCallback(
     ({ target: { name, value } }) => {
       onChangeValue({
@@ -101,17 +102,20 @@ const FormularioPermissoes = ({
         )}
       </div>
 
-      <div className="student-form-row">
-        <div className="student-form-field-container checkbox">
-          <label>Eu autorizo o estudante a sair sozinho da escola ao final das atividades escolares ou do turno escola.</label>
-          <input
-            type="checkbox"
-            onChange={onChangeAutorizaoSaidaSozinho}
-            name="autorizaoSaidaSozinho"
-            checked={seguranca.autorizaoSaidaSozinho}
-          />
+      {cabecalho.temAutorizaoSaidaSozinho && (
+
+        <div className="student-form-row">
+          <div className="student-form-field-container checkbox">
+            <label>Eu autorizo o estudante a sair sozinho da escola ao final das atividades escolares ou do turno escola.</label>
+            <input
+              type="checkbox"
+              onChange={onChangeAutorizaoSaidaSozinho}
+              name="autorizaoSaidaSozinho"
+              checked={seguranca.autorizaoSaidaSozinho}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       <div className="student-form-field-container">
         <label>Observações adicionais:</label>
