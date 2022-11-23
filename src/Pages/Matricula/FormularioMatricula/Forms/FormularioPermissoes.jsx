@@ -17,6 +17,15 @@ const FormularioPermissoes = ({
     [onChangeValue, seguranca]
   );
 
+  const onChangeAutorizaoSaidaSozinho = (e) => {
+    onChangeValue({
+      seguranca: {
+        ...seguranca,
+        autorizaoSaidaSozinho: e.target.checked,
+      },
+    });
+  };
+
   const onChangePermissaoPessoa = useCallback(
     ({ target: { name, value } }, index) => {
       const newPessoas = seguranca.pessoas;
@@ -34,7 +43,6 @@ const FormularioPermissoes = ({
     },
     [onChangeValue, seguranca]
   );
-  console.log(seguranca.pessoas);
   return (
     <div className="matricula-form-fields">
       <h4>Segurança</h4>
@@ -91,6 +99,18 @@ const FormularioPermissoes = ({
             />
           </div>
         )}
+      </div>
+
+      <div className="student-form-row">
+        <div className="student-form-field-container checkbox">
+          <label>Eu autorizo o estudante a sair sozinho da escola ao final das atividades escolares ou do turno escola.</label>
+          <input
+            type="checkbox"
+            onChange={onChangeAutorizaoSaidaSozinho}
+            name="autorizaoSaidaSozinho"
+            checked={seguranca.autorizaoSaidaSozinho}
+          />
+        </div>
       </div>
 
       <div className="student-form-field-container">

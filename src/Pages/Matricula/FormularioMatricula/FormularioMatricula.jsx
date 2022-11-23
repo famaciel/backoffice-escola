@@ -93,6 +93,7 @@ const formEmptyFields = {
         parentesco: "",
       },
     ],
+    autorizaoSaidaSozinho: false
   },
   autorizacoes: {
     medicamentosUsoContinuo: "",
