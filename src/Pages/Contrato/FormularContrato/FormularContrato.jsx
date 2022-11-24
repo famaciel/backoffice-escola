@@ -64,6 +64,9 @@ const FormularContrato = () => {
       ]);
 
       setContrato(contrato);
+
+      calculate(contrato);
+
     } catch (err) {
       console.error("ERROR: ", err);
     } finally {
