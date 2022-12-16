@@ -105,6 +105,16 @@ const FormularioEmergencial = ({
           />
         </div>
         <div className="student-form-field-container">
+          <label>Restrição medica/alimentar:</label>
+          <input
+            name="restricaoAlimentar"
+            onChange={onChange}
+            value={autorizacoes.restricaoAlimentar}
+          />
+        </div>
+      </div>
+      <div className="student-form-row">
+        <div className="student-form-field-container">
           <label>Alergias:</label>
           <input
             name="alergias"
@@ -114,14 +124,6 @@ const FormularioEmergencial = ({
         </div>
       </div>
       <div className="student-form-row">
-        <div className="student-form-field-container">
-          <label>Restrição medica/alimentar:</label>
-          <input
-            name="restricaoAlimentar"
-            onChange={onChange}
-            value={autorizacoes.restricaoAlimentar}
-          />
-        </div>
         <div className="student-form-field-container">
           <label>Medicamentos de uso contínuo:</label>
           <input
