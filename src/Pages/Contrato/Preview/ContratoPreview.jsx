@@ -25,6 +25,14 @@ const parcelaOptions = [
     value: 2,
   },
   {
+    label: "10x",
+    value: 10,
+  },
+  {
+    label: "11x",
+    value: 11,
+  },
+  {
     label: "12x",
     value: 12,
   },
@@ -42,6 +50,14 @@ const parcelaTaxasOptions = [
   {
     label: "2x",
     value: 2,
+  },
+  {
+    label: "10x",
+    value: 10,
+  },
+  {
+    label: "11x",
+    value: 11,
   },
   {
     label: "12x",
